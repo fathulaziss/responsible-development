@@ -1,0 +1,135 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    flavorDimensions "flavor-dimension"
+
+    productFlavors {
+        development {
+            dimension "flavor-dimension"
+            applicationId "com.anj.responsible_development"
+            resValue "string", "app_name", "Responsible Development Dev"
+            proguardFile 'proguard-rules.pro'
+        }
+
+        production {
+            dimension "flavor-dimension"
+            applicationId "com.anj.responsible_development"
+            resValue "string", "app_name", "Responsible Development Prod"
+            proguardFile 'proguard-rules.pro'
+        }
+    }
+
+    namespace "com.anj.responsible_development"
+    compileSdkVersion 33
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.anj.responsible_development"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+        ndk { abiFilters "armeabi", "x86", "armeabi-v7a","x86_64", "mips",
+         "mips64", "arm64-v8a" }
+    }
+
+    // Uncomment below when build App Bundle
+    // signingConfigs {
+    //    release {
+    //        keyAlias keystoreProperties['keyAlias']
+    //        keyPassword keystoreProperties['keyPassword']
+    //        storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+    //        storePassword keystoreProperties['storePassword']
+    //    }
+    // }
+
+    buildTypes {
+        release {
+            // Change to signingConfigs.release when build App Bundle
+            // Don't Forget change to signingConfigs.debug when run App or signingConfigs.release when build App Bundle
+            signingConfig signingConfigs.debug
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
+            // Includes the default ProGuard rules files that are packaged with
+            // the Android Gradle plugin. To learn more, go to the section about
+            // R8 configuration files.
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+            'proguard-rules.pro'
+
+            ndk {
+                abiFilters 'armeabi-v7a','arm64-v8a','x86_64'
+            }
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
+            // Includes the default ProGuard rules files that are packaged with
+            // the Android Gradle plugin. To learn more, go to the section about
+            // R8 configuration files.
+             proguardFiles getDefaultProguardFile('proguard-android.txt'),
+            'proguard-rules.pro'
+
+            ndk {
+                abiFilters 'armeabi-v7a','arm64-v8a','x86_64'
+            }
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {}
