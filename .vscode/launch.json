@@ -59,4 +59,7 @@
     // AppBundle
     // flutter build appbundle --flavor development -t lib/main_development.dart
     // flutter build appbundle --flavor production -t lib/main_production.dart
+
+    // To Generate Translation
+    // flutter gen-l10n
 }

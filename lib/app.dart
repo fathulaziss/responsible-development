@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:responsible_development/common/styles.dart';
+import 'package:responsible_development/provider/utility_provider.dart';
+import 'package:responsible_development/services/navigation_service.dart';
+import 'package:responsible_development/ui/login/login_view.dart';
 import 'package:responsible_development/ui/main/main_view.dart';
+import 'package:responsible_development/ui/splash/splash_view.dart';
+import 'package:responsible_development/utils/app_utils.dart';
 
 void start() {
   runApp(const App());
@@ -21,28 +30,52 @@ class _AppState extends State<App> {
       DeviceOrientation.portraitDown,
     ]);
 
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UtilityProvider>(
+          create: (context) => UtilityProvider(),
+        ),
+      ],
+      child: Consumer<UtilityProvider>(
+        builder: (context, utilityProvider, _) {
+          return MaterialApp(
+            navigatorKey: navigatorKey,
+            theme: utilityProvider.theme,
+            darkTheme: darkTheme,
+            locale: Locale(
+              utilityProvider.appLanguage.languageCode,
+              utilityProvider.appLanguage.countryCode,
+            ),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', 'US'),
+              Locale('id', 'ID'),
+            ],
+            builder: (context, child) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: const TextScaler.linear(1.22),
+                ),
+                child: GestureDetector(
+                  onTap: AppUtils.dismissKeyboard,
+                  child: child,
+                ),
+              );
+            },
+            initialRoute: SplashView.routeName,
+            routes: {
+              SplashView.routeName: (context) => const SplashView(),
+              LoginView.routeName: (context) => const LoginView(),
+              MainView.routeName: (context) => const MainView(),
+            },
+          );
+        },
       ),
-      home: const MainView(),
     );
   }
 }
