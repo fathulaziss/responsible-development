@@ -1,5 +1,7 @@
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/login/login_view.dart';
+import 'package:responsible_development/ui/main/main_view.dart';
+import 'package:responsible_development/utils/app_storage.dart';
 import 'package:responsible_development/utils/app_utils.dart';
 
 class AppCycleService {
@@ -19,12 +21,12 @@ class AppCycleService {
       await Future.delayed(const Duration(seconds: 3));
 
       //* CHECK TOKEN
-      // final token = await AppStorage.read(key: 'token');
-      // if (token.isEmpty) {
-      //   AppUtils.logger('token not exist');
-      //   await NavigationService.pushNamedAndRemoveUntil(LoginView.routeName);
-      //   return;
-      // }
+      final token = await AppStorage.read(key: 'token');
+      if (token.isEmpty) {
+        AppUtils.logger('token not exist');
+        await NavigationService.pushNamedAndRemoveUntil(LoginView.routeName);
+        return;
+      }
 
       //* CHECK TOKEN EXPIRED
       // final isTokenExpired = await AppUtils.checkTokenExpired();
@@ -33,6 +35,11 @@ class AppCycleService {
       //   await NavigationService.pushNamedAndRemoveUntil(MainView.routeName);
       //   return;
       // }
+      if (token.isNotEmpty) {
+        AppUtils.logger('token exist');
+        await NavigationService.pushNamedAndRemoveUntil(MainView.routeName);
+        return;
+      }
 
       //* DEFAULT ROUTES TO SIGN IN
       AppUtils.logger('token exist but expired');

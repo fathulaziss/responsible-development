@@ -34,15 +34,18 @@ dependencies:
   device_info_plus: ^9.1.1
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
+  flutter_spinkit: ^5.2.0
   http: any
   intl: any
+  loader_overlay: ^4.0.0
   package_info_plus: ^5.0.1
   provider: ^6.1.1
   shared_preferences: ^2.2.2
   sqflite: ^2.3.0
+  toast: ^0.3.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

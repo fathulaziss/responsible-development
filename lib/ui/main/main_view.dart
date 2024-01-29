@@ -57,7 +57,10 @@ class _MainViewState extends State<MainView> {
           ),
           bottomNavigationBar: BottomAppBar(
             shape: const CircularNotchedRectangle(),
-            color: Colors.white,
+            color: utilityProvider.isDarkTheme ||
+                    MediaQuery.of(context).platformBrightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
             surfaceTintColor: Colors.white,
             shadowColor: Colors.grey.shade300,
             height: 60,

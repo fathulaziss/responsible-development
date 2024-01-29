@@ -2,9 +2,9 @@ import 'package:responsible_development/common/enum.dart';
 
 class AppConfig {
   static const _urlDevelopment =
-      'https://etrace-dev.anj-group.co.id/backend/public/index.php/';
+      'https://etrace-dev.anj-group.co.id/inspection/public/index.php/api/v1/';
   static const _urlProduction =
-      'https://etrace.anj-group.co.id/backend/public/index.php/';
+      'https://etrace-dev.anj-group.co.id/inspection/public/index.php/api/v1/';
 
   static late Flavor appFlavor;
 
