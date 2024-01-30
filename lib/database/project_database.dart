@@ -17,6 +17,21 @@ class ProjectDatabase {
     ''');
   }
 
+  static Future<List<ProjectModel>> selectData() async {
+    final db = await AppDatabase().database;
+
+    if (db != null) {
+      final dataList = await db.query(projectTable);
+
+      final data =
+          List<ProjectModel>.from(dataList.map(ProjectModel.fromDatabase));
+
+      return data;
+    } else {
+      return [];
+    }
+  }
+
   static Future<void> insertData(List<ProjectModel> data) async {
     final db = await AppDatabase().database;
     if (db != null) {

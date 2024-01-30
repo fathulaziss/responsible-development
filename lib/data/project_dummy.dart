@@ -8,7 +8,7 @@ final projectDummy = [
       'Taupan Sibarani',
       'Mukhlisuddin Nasution',
       'Dadi Supriadi',
-      'Agustinus Airlangga'
+      'Agustinus Airlangga',
     ],
     'location': ['ANJA', 'SMM', 'ANJAS', 'KAL'],
   },
@@ -39,7 +39,7 @@ final projectDummy = [
       'Antonius Simangunsong',
       'Jimmy Efraim',
       'Margo Waluyo',
-      'Ilham RT Damanik'
+      'Ilham RT Damanik',
     ],
     'location': [],
   },
@@ -62,7 +62,7 @@ final projectDummy = [
       'Mukhlisuddin Nasution',
       'Mohd. Amrol Siregar',
       'Dadi Supriadi',
-      'Antonius Simangunsong'
+      'Antonius Simangunsong',
     ],
     'location': [],
   },
@@ -88,7 +88,7 @@ final projectDummy = [
       'Mukhlisuddin Nasution',
       'Mohd. Amrol Siregar',
       'Dadi Supriadi',
-      'Burhannudin'
+      'Burhannudin',
     ],
     'location': ['ANJA', 'SMM', 'ANJAS', 'KAL'],
   },
@@ -117,7 +117,7 @@ final projectDummy = [
       'Lucas Kurniawan',
       'Juli Wankara Purba',
       'Mohammad Fitriyansyah',
-      'Jerileva Purba'
+      'Jerileva Purba',
     ],
     'pic': [
       'Taupan Sibarani',
@@ -126,7 +126,7 @@ final projectDummy = [
       'Dadi Supriadi',
       'Antonius Simangunsong',
       'Jimmy Efraim',
-      'Margo Waluyo'
+      'Margo Waluyo',
     ],
     'location': [],
   },
@@ -138,13 +138,13 @@ final projectDummy = [
       'Nopri Pitoy',
       'Jerileva Purba',
       'Juli Wankara Purba',
-      'Nunik Maharani Maulana'
+      'Nunik Maharani Maulana',
     ],
     'pic': [
       'Windianti',
       'Antoperis Tarigan',
       'Whisnu R. Triatmoko',
-      'Adhika Karuna'
+      'Adhika Karuna',
     ],
     'location': [],
   },

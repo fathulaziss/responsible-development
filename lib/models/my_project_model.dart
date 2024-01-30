@@ -22,17 +22,22 @@ class MyProjectModel {
         category: database['project_id'],
         name: database['project_id'],
         dic: jsonDecode(database['project_dic']) != null
-            ? List<String>.from((jsonDecode(database['project_dic']) as List)
-                .map((e) => e.toString()))
+            ? List<String>.from(
+                (jsonDecode(database['project_dic']) as List)
+                    .map((e) => e.toString()),
+              )
             : [],
         pic: jsonDecode(database['project_pic']) != null
-            ? List<String>.from((jsonDecode(database['project_pic']) as List)
-                .map((e) => e.toString()))
+            ? List<String>.from(
+                (jsonDecode(database['project_pic']) as List)
+                    .map((e) => e.toString()),
+              )
             : [],
         location: jsonDecode(database['project_location']) != null
             ? List<String>.from(
                 (jsonDecode(database['project_location']) as List)
-                    .map((e) => e.toString()))
+                    .map((e) => e.toString()),
+              )
             : [],
       ),
     );

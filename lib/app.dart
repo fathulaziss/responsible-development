@@ -5,13 +5,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:responsible_development/common/styles.dart';
+import 'package:responsible_development/models/project_model.dart';
 import 'package:responsible_development/provider/auth_provider.dart';
 import 'package:responsible_development/provider/profile_provider.dart';
+import 'package:responsible_development/provider/project_provider.dart';
+import 'package:responsible_development/provider/sync_provider.dart';
 import 'package:responsible_development/provider/utility_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
+import 'package:responsible_development/ui/activity/activity_view.dart';
 import 'package:responsible_development/ui/login/login_view.dart';
 import 'package:responsible_development/ui/main/main_view.dart';
+import 'package:responsible_development/ui/project/project_detail_view.dart';
 import 'package:responsible_development/ui/splash/splash_view.dart';
+import 'package:responsible_development/ui/sync/sync_view.dart';
 import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/others/loading_indicator.dart';
 
@@ -44,6 +50,12 @@ class _AppState extends State<App> {
         ),
         ChangeNotifierProvider<ProfileProvider>(
           create: (context) => ProfileProvider(),
+        ),
+        ChangeNotifierProvider<SyncProvider>(
+          create: (context) => SyncProvider(),
+        ),
+        ChangeNotifierProvider<ProjectProvider>(
+          create: (context) => ProjectProvider(),
         ),
       ],
       child: Consumer<UtilityProvider>(
@@ -85,7 +97,17 @@ class _AppState extends State<App> {
               routes: {
                 SplashView.routeName: (context) => const SplashView(),
                 LoginView.routeName: (context) => const LoginView(),
+                SyncView.routeName: (context) => const SyncView(),
                 MainView.routeName: (context) => const MainView(),
+                ProjectDetailView.routeName: (context) {
+                  final data =
+                      ModalRoute.of(context)!.settings.arguments != null
+                          ? ModalRoute.of(context)!.settings.arguments!
+                              as ProjectModel
+                          : ProjectModel();
+                  return ProjectDetailView(data: data);
+                },
+                ActivityView.routeName: (context) => const ActivityView(),
               },
             ),
           );

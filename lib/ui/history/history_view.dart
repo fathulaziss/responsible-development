@@ -5,7 +5,7 @@ class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
   static String routeName = '/history';
-  static String title = 'History';
+  static String title = 'Riwayat';
 
   @override
   Widget build(BuildContext context) {

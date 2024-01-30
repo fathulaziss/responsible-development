@@ -5,7 +5,7 @@ import 'package:responsible_development/models/login_data_model.dart';
 import 'package:responsible_development/repository/auth_repository.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/login/login_view.dart';
-import 'package:responsible_development/ui/main/main_view.dart';
+import 'package:responsible_development/ui/sync/sync_view.dart';
 import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/others/loading_indicator.dart';
 import 'package:responsible_development/widgets/others/show_dialog.dart';
@@ -80,7 +80,7 @@ class AuthProvider extends ChangeNotifier {
             context.loaderOverlay.hide();
           }
 
-          await NavigationService.pushReplacementNamed(MainView.routeName);
+          await NavigationService.pushReplacementNamed(SyncView.routeName);
         },
         onError: (String errorMessage) {
           context.loaderOverlay.hide();

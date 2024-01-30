@@ -42,7 +42,7 @@ class UserDatabase {
 
   static Future<UserModel> selectData() async {
     final db = await AppDatabase().database;
-    UserModel data = UserModel();
+    var data = UserModel();
     if (db != null) {
       final temp = await db.query(userTable);
       data = UserModel.fromMap(temp.first);

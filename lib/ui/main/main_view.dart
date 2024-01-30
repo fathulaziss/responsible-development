@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsible_development/common/colors.dart';
 import 'package:responsible_development/provider/utility_provider.dart';
+import 'package:responsible_development/services/navigation_service.dart';
+import 'package:responsible_development/ui/activity/activity_view.dart';
 import 'package:responsible_development/ui/history/history_view.dart';
 import 'package:responsible_development/ui/home/home_view.dart';
 import 'package:responsible_development/ui/profile/profile_view.dart';
@@ -50,9 +52,12 @@ class _MainViewState extends State<MainView> {
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100)),
+              borderRadius: BorderRadius.circular(100),
+            ),
             backgroundColor: AppColor.primary,
-            onPressed: () {},
+            onPressed: () {
+              NavigationService.pushNamed(ActivityView.routeName);
+            },
             child: const Icon(Icons.assignment_add, color: Colors.white),
           ),
           bottomNavigationBar: BottomAppBar(

@@ -29,7 +29,7 @@ class LoginDataModel {
       'token': token,
       'token_expired_at': tokenExpiredAt,
       'user': user?.toMap(),
-      'access': List.from(access!.map((e) => e.toMap()))
+      'access': List.from(access!.map((e) => e.toMap())),
     };
   }
 

@@ -32,7 +32,8 @@ class _SplashViewState extends State<SplashView> {
               : Colors.white,
           bottomNavigationBar: const FooterDefault(),
           body: Center(
-              child: Image.asset(AppAsset.logo('logo-anj.png'), height: 65)),
+            child: Image.asset(AppAsset.logo('logo-anj.png'), height: 65),
+          ),
         );
       },
     );

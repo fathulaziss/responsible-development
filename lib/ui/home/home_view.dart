@@ -5,7 +5,7 @@ class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   static String routeName = '/home';
-  static String title = 'Home';
+  static String title = 'Beranda';
 
   @override
   Widget build(BuildContext context) {

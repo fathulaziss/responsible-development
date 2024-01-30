@@ -68,8 +68,10 @@ class _LoginViewState extends State<LoginView> {
                       children: [
                         Image.asset(AppAsset.logo('logo-anj.png'), height: 65),
                         const VerticalSpace(height: 4),
-                        Text('Responsible Development',
-                            style: textStyle.titleSmall),
+                        Text(
+                          'Responsible Development',
+                          style: textStyle.titleSmall,
+                        ),
                         const VerticalSpace(height: 24),
                         Form(
                           key: formKey,

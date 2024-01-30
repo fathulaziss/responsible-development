@@ -15,7 +15,7 @@ class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
   static String routeName = '/profile';
-  static String title = 'Profile';
+  static String title = 'Profil';
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
@@ -35,24 +35,36 @@ class _ProfileViewState extends State<ProfileView> {
         return Consumer<ProfileProvider>(
           builder: (context, profileProvider, _) {
             return Scaffold(
+              appBar: AppBar(
+                title: const Text('Profil', textAlign: TextAlign.center),
+                centerTitle: true,
+              ),
               body: Column(
                 children: [
-                  VerticalSpace(height: MediaQuery.of(context).viewPadding.top),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColor.primary, width: 2),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.account_circle,
-                        size: 75, color: AppColor.primary),
+                    child: const Icon(
+                      Icons.account_circle,
+                      size: 75,
+                      color: AppColor.primary,
+                    ),
                   ),
-                  Text('${profileProvider.user.name}',
-                      style: textStyle.labelSmall),
-                  Text('${profileProvider.user.email}',
-                      style: textStyle.bodyMedium),
-                  Text('${profileProvider.user.username}',
-                      style: textStyle.bodyMedium),
+                  Text(
+                    '${profileProvider.user.name}',
+                    style: textStyle.labelSmall,
+                  ),
+                  Text(
+                    '${profileProvider.user.email}',
+                    style: textStyle.bodyMedium,
+                  ),
+                  Text(
+                    '${profileProvider.user.username}',
+                    style: textStyle.bodyMedium,
+                  ),
                   const VerticalSpace(height: 16),
                   const CustomDivider(height: 0),
                   Expanded(
@@ -99,7 +111,7 @@ class _ProfileViewState extends State<ProfileView> {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );

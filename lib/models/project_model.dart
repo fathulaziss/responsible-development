@@ -23,7 +23,8 @@ class ProjectModel {
           : [],
       location: map['location'] != null
           ? List<String>.from(
-              (map['location'] as List).map((e) => e.toString()))
+              (map['location'] as List).map((e) => e.toString()),
+            )
           : [],
     );
   }
@@ -35,15 +36,19 @@ class ProjectModel {
       name: database['name'],
       dic: jsonDecode(database['dic']) != null
           ? List<String>.from(
-              (jsonDecode(database['dic']) as List).map((e) => e.toString()))
+              (jsonDecode(database['dic']) as List).map((e) => e.toString()),
+            )
           : [],
       pic: jsonDecode(database['pic']) != null
           ? List<String>.from(
-              (jsonDecode(database['pic']) as List).map((e) => e.toString()))
+              (jsonDecode(database['pic']) as List).map((e) => e.toString()),
+            )
           : [],
       location: jsonDecode(database['location']) != null
-          ? List<String>.from((jsonDecode(database['location']) as List)
-              .map((e) => e.toString()))
+          ? List<String>.from(
+              (jsonDecode(database['location']) as List)
+                  .map((e) => e.toString()),
+            )
           : [],
     );
   }
