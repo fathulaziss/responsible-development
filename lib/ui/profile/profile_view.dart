@@ -5,6 +5,8 @@ import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/provider/auth_provider.dart';
 import 'package:responsible_development/provider/profile_provider.dart';
 import 'package:responsible_development/provider/utility_provider.dart';
+import 'package:responsible_development/services/navigation_service.dart';
+import 'package:responsible_development/ui/my_project/my_project_view.dart';
 import 'package:responsible_development/utils/app_config.dart';
 import 'package:responsible_development/widgets/others/custom_divider.dart';
 import 'package:responsible_development/widgets/others/custom_item_row.dart';
@@ -86,6 +88,14 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                             ),
                             padding: EdgeInsets.zero,
+                          ),
+                          CustomItemRow(
+                            labelText: 'Proyek RD Saya',
+                            onTap: () {
+                              NavigationService.pushNamed(
+                                MyProjectView.routeName,
+                              );
+                            },
                           ),
                           CustomItemRow(
                             labelText: 'Log Out',

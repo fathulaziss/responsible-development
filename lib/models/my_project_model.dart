@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:responsible_development/models/project_model.dart';
 
 class MyProjectModel {
-  MyProjectModel({this.percentage, this.project});
+  MyProjectModel({this.userId, this.percentage, this.project});
 
   factory MyProjectModel.fromMap(Map<String, dynamic> map) {
     return MyProjectModel(
+      userId: map['user_id'],
       percentage: map['percentage'],
       project: map['project'] != null
           ? ProjectModel.fromMap(map['project'])
@@ -16,11 +17,12 @@ class MyProjectModel {
 
   factory MyProjectModel.fromDatabase(Map<String, dynamic> database) {
     return MyProjectModel(
+      userId: database['user_id'],
       percentage: database['percentage'],
       project: ProjectModel(
         id: database['project_id'],
-        category: database['project_id'],
-        name: database['project_id'],
+        category: database['project_category'],
+        name: database['project_name'],
         dic: jsonDecode(database['project_dic']) != null
             ? List<String>.from(
                 (jsonDecode(database['project_dic']) as List)
@@ -43,11 +45,13 @@ class MyProjectModel {
     );
   }
 
+  String? userId;
   double? percentage;
   ProjectModel? project;
 
   Map<String, dynamic> toMap() {
     return {
+      'user_id': userId,
       'percentage': percentage,
       'project': project?.toMap(),
     };
@@ -55,6 +59,7 @@ class MyProjectModel {
 
   Map<String, dynamic> toDatabase() {
     return {
+      'user_id': userId,
       'percentage': percentage,
       'project_id': project?.id,
       'project_category': project?.category,

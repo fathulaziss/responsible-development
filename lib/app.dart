@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/models/project_model.dart';
 import 'package:responsible_development/provider/auth_provider.dart';
+import 'package:responsible_development/provider/my_project_provider.dart';
 import 'package:responsible_development/provider/profile_provider.dart';
 import 'package:responsible_development/provider/project_provider.dart';
 import 'package:responsible_development/provider/sync_provider.dart';
@@ -15,6 +16,8 @@ import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/activity/activity_view.dart';
 import 'package:responsible_development/ui/login/login_view.dart';
 import 'package:responsible_development/ui/main/main_view.dart';
+import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
+import 'package:responsible_development/ui/my_project/my_project_view.dart';
 import 'package:responsible_development/ui/project/project_detail_view.dart';
 import 'package:responsible_development/ui/splash/splash_view.dart';
 import 'package:responsible_development/ui/sync/sync_view.dart';
@@ -56,6 +59,9 @@ class _AppState extends State<App> {
         ),
         ChangeNotifierProvider<ProjectProvider>(
           create: (context) => ProjectProvider(),
+        ),
+        ChangeNotifierProvider<MyProjectProvider>(
+          create: (context) => MyProjectProvider(),
         ),
       ],
       child: Consumer<UtilityProvider>(
@@ -108,6 +114,9 @@ class _AppState extends State<App> {
                   return ProjectDetailView(data: data);
                 },
                 ActivityView.routeName: (context) => const ActivityView(),
+                MyProjectView.routeName: (context) => const MyProjectView(),
+                MyProjectAddView.routeName: (context) =>
+                    const MyProjectAddView(),
               },
             ),
           );

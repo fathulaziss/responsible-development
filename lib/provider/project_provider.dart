@@ -10,21 +10,19 @@ class ProjectProvider extends ChangeNotifier {
   List<ProjectModel> get listProject => _listProject;
 
   Future<void> getProject(BuildContext context) async {
-    if (context.mounted) {
+    if (_listProject.isEmpty) {
       context.loaderOverlay.show(
         widgetBuilder: (progress) => const LoadingIndicatorDefault(),
       );
-    }
 
-    if (_listProject.isEmpty) {
-      await Future.delayed(const Duration(seconds: 1));
       final data = await ProjectDatabase.selectData();
       _listProject = data;
+      await Future.delayed(const Duration(seconds: 1));
       notifyListeners();
-    }
 
-    if (context.mounted) {
-      context.loaderOverlay.hide();
+      if (context.mounted) {
+        context.loaderOverlay.hide();
+      }
     }
   }
 }
