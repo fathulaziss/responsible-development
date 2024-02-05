@@ -19,6 +19,7 @@ import 'package:responsible_development/ui/main/main_view.dart';
 import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
 import 'package:responsible_development/ui/my_project/my_project_view.dart';
 import 'package:responsible_development/ui/project/project_detail_view.dart';
+import 'package:responsible_development/ui/project/project_search_view.dart';
 import 'package:responsible_development/ui/splash/splash_view.dart';
 import 'package:responsible_development/ui/sync/sync_view.dart';
 import 'package:responsible_development/utils/app_utils.dart';
@@ -117,6 +118,8 @@ class _AppState extends State<App> {
                 MyProjectView.routeName: (context) => const MyProjectView(),
                 MyProjectAddView.routeName: (context) =>
                     const MyProjectAddView(),
+                ProjectSearchView.routeName: (context) =>
+                    const ProjectSearchView(),
               },
             ),
           );
