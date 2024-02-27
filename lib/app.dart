@@ -6,6 +6,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/models/project_model.dart';
+import 'package:responsible_development/provider/activity_provider.dart';
 import 'package:responsible_development/provider/auth_provider.dart';
 import 'package:responsible_development/provider/my_project_provider.dart';
 import 'package:responsible_development/provider/profile_provider.dart';
@@ -64,6 +65,9 @@ class _AppState extends State<App> {
         ChangeNotifierProvider<MyProjectProvider>(
           create: (context) => MyProjectProvider(),
         ),
+        ChangeNotifierProvider<ActivityProvider>(
+          create: (context) => ActivityProvider(),
+        ),
       ],
       child: Consumer<UtilityProvider>(
         builder: (context, utilityProvider, _) {
@@ -111,15 +115,21 @@ class _AppState extends State<App> {
                       ModalRoute.of(context)!.settings.arguments != null
                           ? ModalRoute.of(context)!.settings.arguments!
                               as ProjectModel
-                          : ProjectModel();
+                          : const ProjectModel();
                   return ProjectDetailView(data: data);
                 },
                 ActivityView.routeName: (context) => const ActivityView(),
                 MyProjectView.routeName: (context) => const MyProjectView(),
                 MyProjectAddView.routeName: (context) =>
                     const MyProjectAddView(),
-                ProjectSearchView.routeName: (context) =>
-                    const ProjectSearchView(),
+                ProjectSearchView.routeName: (context) {
+                  final data =
+                      ModalRoute.of(context)!.settings.arguments != null
+                          ? ModalRoute.of(context)!.settings.arguments!
+                              as List<ProjectModel>
+                          : <ProjectModel>[];
+                  return ProjectSearchView(listMyProject: data);
+                },
               },
             ),
           );

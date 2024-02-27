@@ -11,7 +11,7 @@ class MyProjectModel {
       percentage: map['percentage'],
       project: map['project'] != null
           ? ProjectModel.fromMap(map['project'])
-          : ProjectModel(),
+          : const ProjectModel(),
     );
   }
 

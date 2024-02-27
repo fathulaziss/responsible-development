@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-class ProjectModel {
-  ProjectModel({
+import 'package:equatable/equatable.dart';
+
+class ProjectModel extends Equatable {
+  const ProjectModel({
     this.id,
     this.category,
     this.name,
@@ -53,12 +55,12 @@ class ProjectModel {
     );
   }
 
-  String? id;
-  String? category;
-  String? name;
-  List<String>? dic;
-  List<String>? pic;
-  List<String>? location;
+  final String? id;
+  final String? category;
+  final String? name;
+  final List<String>? dic;
+  final List<String>? pic;
+  final List<String>? location;
 
   Map<String, dynamic> toMap() {
     return {
@@ -86,4 +88,7 @@ class ProjectModel {
   String toString() {
     return 'ProjectModel(id: $id, category: $category, name: $name, dic: $dic, pic: $pic, location: $location)';
   }
+
+  @override
+  List<Object?> get props => [id, category, name, dic, pic, location];
 }

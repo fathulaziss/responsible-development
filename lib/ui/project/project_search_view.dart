@@ -8,9 +8,12 @@ import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/cards/card_custom.dart';
 import 'package:responsible_development/widgets/inputs/input_search.dart';
 import 'package:responsible_development/widgets/others/horizontal_space.dart';
+import 'package:responsible_development/widgets/others/show_dialog.dart';
 
 class ProjectSearchView extends StatefulWidget {
-  const ProjectSearchView({super.key});
+  const ProjectSearchView({super.key, this.listMyProject = const []});
+
+  final List<ProjectModel> listMyProject;
 
   static String routeName = '/project-search';
 
@@ -68,8 +71,16 @@ class _ProjectSearchViewState extends State<ProjectSearchView> {
   }
 
   void selectProject(ProjectModel value) {
-    AppUtils.dismissKeyboard();
-    NavigationService.pop(result: value);
+    if (widget.listMyProject.contains(value)) {
+      showToast(
+        context,
+        message: 'Proyek Ini Sudah Anda Pilih',
+        backgroundColor: AppColor.warning,
+      );
+    } else {
+      AppUtils.dismissKeyboard();
+      NavigationService.pop(result: value);
+    }
   }
 
   @override
@@ -132,7 +143,7 @@ class _ProjectSearchViewState extends State<ProjectSearchView> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () => selectProject(data),
                             icon: const Icon(
                               Icons.add_box_rounded,
                               color: AppColor.primary,

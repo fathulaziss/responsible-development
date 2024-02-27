@@ -244,6 +244,9 @@ class _MyProjectAddViewState extends State<MyProjectAddView> {
                               onTap: () async {
                                 final data = await NavigationService.pushNamed(
                                   ProjectSearchView.routeName,
+                                  arguments: List<ProjectModel>.from(
+                                    listMyProject.map((e) => e.project),
+                                  ),
                                 );
                                 if (data != null) {
                                   selectedProject = data;
