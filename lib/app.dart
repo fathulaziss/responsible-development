@@ -83,6 +83,7 @@ class _AppState extends State<App> {
                 utilityProvider.appLanguage.languageCode,
                 utilityProvider.appLanguage.countryCode,
               ),
+              debugShowCheckedModeBanner: false,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,

@@ -24,6 +24,8 @@ class InputPrimary extends StatefulWidget {
     this.maxLines = 1,
     this.obsecureText = false,
     this.onChanged,
+    this.onTap,
+    this.onTapSuffixIcon,
     this.preffixIcon,
     this.radius = 8,
     this.readOnly = false,
@@ -31,7 +33,6 @@ class InputPrimary extends StatefulWidget {
     this.textAlign = TextAlign.left,
     this.textCapitalization = TextCapitalization.none,
     this.textInputAction,
-    this.onTapSuffixIcon,
     this.validator,
     this.validatorText = "Field Can't Be Empty",
   });
@@ -51,6 +52,8 @@ class InputPrimary extends StatefulWidget {
   final int? maxLines;
   final bool obsecureText;
   final ValueSetter<String>? onChanged;
+  final Function()? onTap;
+  final Function()? onTapSuffixIcon;
   final IconData? preffixIcon;
   final double radius;
   final bool readOnly;
@@ -58,7 +61,6 @@ class InputPrimary extends StatefulWidget {
   final TextAlign textAlign;
   final TextCapitalization textCapitalization;
   final TextInputAction? textInputAction;
-  final Function()? onTapSuffixIcon;
   final String? Function(String?)? validator;
   final String validatorText;
 
@@ -300,6 +302,7 @@ class _InputPrimaryState extends State<InputPrimary> {
                   maxLines: widget.maxLines,
                   obscureText: widget.obsecureText,
                   onChanged: widget.onChanged,
+                  onTap: widget.onTap,
                   readOnly: widget.readOnly,
                   style: textStyle.bodyMedium!.copyWith(height: 1),
                   textAlign: widget.textAlign,

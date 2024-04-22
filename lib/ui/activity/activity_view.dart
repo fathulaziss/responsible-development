@@ -1,12 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:responsible_development/common/colors.dart';
-import 'package:responsible_development/common/styles.dart';
+import 'package:responsible_development/models/my_project_model.dart';
 import 'package:responsible_development/provider/activity_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
 import 'package:responsible_development/widgets/buttons/button_primary.dart';
-import 'package:responsible_development/widgets/others/custom_divider.dart';
+import 'package:responsible_development/widgets/inputs/input_date.dart';
+import 'package:responsible_development/widgets/inputs/input_dropdown.dart';
+import 'package:responsible_development/widgets/inputs/input_primary.dart';
+import 'package:responsible_development/widgets/inputs/input_time.dart';
+import 'package:responsible_development/widgets/others/input_dropdown_item.dart';
+import 'package:responsible_development/widgets/others/vertical_space.dart';
 
 class ActivityView extends StatefulWidget {
   const ActivityView({super.key});
@@ -18,10 +24,18 @@ class ActivityView extends StatefulWidget {
 }
 
 class _ActivityViewState extends State<ActivityView> {
+  final descriptionController = TextEditingController();
+
   @override
   void initState() {
     context.read<ActivityProvider>().getMyProject(context);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    descriptionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -33,6 +47,12 @@ class _ActivityViewState extends State<ActivityView> {
             title: const Text('Aktivitas Proyek'),
             iconTheme: const IconThemeData(color: Colors.white),
           ),
+          bottomNavigationBar: activityProvider.listMyProject.isEmpty
+              ? const SizedBox()
+              : Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: ButtonPrimary(label: 'Simpan', onPressed: () {}),
+                ),
           body: activityProvider.listMyProject.isEmpty
               ? Center(
                   child: Padding(
@@ -50,51 +70,62 @@ class _ActivityViewState extends State<ActivityView> {
                     ),
                   ),
                 )
-              : Flex(
-                  direction: Axis.vertical,
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: activityProvider.listMyProject.length,
-                        itemBuilder: (context, index) {
-                          final data = activityProvider.listMyProject[index];
-                          return Padding(
-                            padding: EdgeInsets.fromLTRB(
-                              12,
-                              12,
-                              12,
-                              data == activityProvider.listMyProject.last
-                                  ? 45
-                                  : 0,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Proyek RD ${index + 1} :',
-                                  style: textStyle.labelSmall,
-                                ),
-                                Text(
-                                  data.project?.name ?? '',
-                                  style: textStyle.labelSmall!.copyWith(
-                                    color: AppColor.primary,
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const VerticalSpace(height: 12),
+                        InputDropdown(
+                          items: [
+                            ...activityProvider.listMyProject.map(
+                              (item) {
+                                return DropdownMenuItem<MyProjectModel>(
+                                  value: item,
+                                  child: InputDropdownItem(
+                                    value: '${item.project?.name}',
                                   ),
-                                ),
-                                Text(
-                                  'Persentase : ${data.percentage!.toStringAsFixed(0)}%',
-                                  style: textStyle.labelSmall!.copyWith(
-                                    color: AppColor.primary,
-                                  ),
-                                ),
-                                const CustomDivider(),
-                              ],
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
+                          ],
+                          labelText: 'Proyek RD',
+                          hintText: 'Pilih Proyek RD',
+                          selectedItem:
+                              '${activityProvider.selectedProject.project != null ? activityProvider.selectedProject.project!.name : ''}',
+                          onChanged: activityProvider.setSelectedProject,
+                        ),
+                        const VerticalSpace(height: 12),
+                        InputDate(
+                          labelText: 'Tanggal',
+                          hintText: 'Pilih Tanggal',
+                          onChanged: (value) {},
+                        ),
+                        InputTime(
+                          labelText: 'Waktu Mulai',
+                          hintText: 'Pilih waktu memulai aktivitas',
+                          onChanged: (value) {
+                            log('check Waktu Mulai : ${value?.hour.toString().padLeft(2, '0')}:${value?.minute.toString().padLeft(2, '0')}');
+                          },
+                        ),
+                        InputTime(
+                          labelText: 'Waktu Selesai',
+                          hintText: 'Pilih waktu menyelesaikan aktivitas',
+                          onChanged: (value) {
+                            log('check Waktu Selesai : ${value?.hour.toString().padLeft(2, '0')}:${value?.minute.toString().padLeft(2, '0')}');
+                          },
+                        ),
+                        InputPrimary(
+                          controller: descriptionController,
+                          labelText: 'Deskripsi',
+                          hintText: 'Masukkan Deskripsi',
+                          maxLines: 10,
+                          keyboardType: TextInputType.multiline,
+                          validator: (value) => null,
+                        ),
+                      ],
                     ),
-                    const Expanded(child: SizedBox()),
-                  ],
+                  ),
                 ),
         );
       },

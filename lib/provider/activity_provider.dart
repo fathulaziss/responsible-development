@@ -10,6 +10,10 @@ class ActivityProvider extends ChangeNotifier {
 
   List<MyProjectModel> get listMyProject => _listMyProject;
 
+  MyProjectModel _selectedProject = MyProjectModel();
+
+  MyProjectModel get selectedProject => _selectedProject;
+
   Future<void> getMyProject(BuildContext context) async {
     if (_listMyProject.isEmpty) {
       context.loaderOverlay.show(
@@ -24,6 +28,16 @@ class ActivityProvider extends ChangeNotifier {
       if (context.mounted) {
         context.loaderOverlay.hide();
       }
+    }
+
+    _selectedProject = MyProjectModel();
+  }
+
+  void setSelectedProject(Object? value) {
+    if (value != null) {
+      final data = value as MyProjectModel;
+      _selectedProject = data;
+      notifyListeners();
     }
   }
 }

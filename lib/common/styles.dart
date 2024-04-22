@@ -47,6 +47,17 @@ final darkTheme = ThemeData(
   ),
   scaffoldBackgroundColor: Colors.black,
   textTheme: textStyle,
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
+      backgroundColor:
+          MaterialStateColor.resolveWith((states) => Colors.orange),
+      overlayColor:
+          MaterialStateColor.resolveWith((states) => Colors.deepOrange),
+    ),
+  ),
+  timePickerTheme: timePickerTheme,
+  datePickerTheme: datePickerTheme,
   useMaterial3: true,
 );
 
@@ -80,6 +91,17 @@ final lightTheme = ThemeData(
   ),
   scaffoldBackgroundColor: AppColor.scaffoldBackground,
   textTheme: textStyle,
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
+      backgroundColor:
+          MaterialStateColor.resolveWith((states) => Colors.orange),
+      overlayColor:
+          MaterialStateColor.resolveWith((states) => Colors.deepOrange),
+    ),
+  ),
+  timePickerTheme: timePickerTheme,
+  datePickerTheme: datePickerTheme,
   useMaterial3: true,
 );
 
@@ -108,3 +130,89 @@ InputDecoration inputDecoration({
             .copyWith(color: hintColor ?? const Color(0xFFC1BABA)),
   );
 }
+
+final timePickerTheme = TimePickerThemeData(
+  backgroundColor: Colors.blueGrey,
+  hourMinuteShape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+    side: BorderSide(color: Colors.orange, width: 4),
+  ),
+  dayPeriodBorderSide: BorderSide(color: Colors.blueGrey.shade800, width: 4),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+    side: BorderSide(color: Colors.orange, width: 4),
+  ),
+  dayPeriodTextColor: Colors.white,
+  dayPeriodShape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+    side: BorderSide(color: Colors.orange, width: 4),
+  ),
+  hourMinuteColor: MaterialStateColor.resolveWith(
+    (states) => states.contains(MaterialState.selected)
+        ? Colors.orange
+        : Colors.blueGrey.shade800,
+  ),
+  hourMinuteTextColor: MaterialStateColor.resolveWith(
+    (states) =>
+        states.contains(MaterialState.selected) ? Colors.white : Colors.orange,
+  ),
+  dialHandColor: Colors.blueGrey.shade700,
+  dialBackgroundColor: Colors.blueGrey.shade800,
+  hourMinuteTextStyle: textStyle.titleMedium!.copyWith(fontSize: 20),
+  helpTextStyle: textStyle.labelSmall!.copyWith(color: Colors.white),
+  inputDecorationTheme: const InputDecorationTheme(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.orange, width: 4),
+    ),
+    contentPadding: EdgeInsets.zero,
+  ),
+  dialTextStyle: textStyle.labelMedium!.copyWith(color: Colors.white),
+  cancelButtonStyle: ButtonStyle(
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+    backgroundColor: MaterialStateProperty.all(Colors.red),
+    overlayColor: MaterialStateProperty.all(Colors.red),
+    textStyle: MaterialStateProperty.all(
+      textStyle.labelMedium!.copyWith(color: Colors.white),
+    ),
+  ),
+  confirmButtonStyle: ButtonStyle(
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+    backgroundColor: MaterialStateProperty.all(Colors.green),
+    overlayColor: MaterialStateProperty.all(Colors.green),
+    textStyle: MaterialStateProperty.all(
+      textStyle.labelMedium!.copyWith(color: Colors.white),
+    ),
+  ),
+  dialTextColor: MaterialStateColor.resolveWith(
+    (states) =>
+        states.contains(MaterialState.selected) ? Colors.orange : Colors.white,
+  ),
+  entryModeIconColor: Colors.orange,
+);
+
+final datePickerTheme = DatePickerThemeData(
+  cancelButtonStyle: ButtonStyle(
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+    backgroundColor: MaterialStateProperty.all(Colors.red),
+    overlayColor: MaterialStateProperty.all(Colors.red),
+    textStyle: MaterialStateProperty.all(
+      textStyle.labelMedium!.copyWith(color: Colors.white),
+    ),
+  ),
+  confirmButtonStyle: ButtonStyle(
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+    backgroundColor: MaterialStateProperty.all(Colors.green),
+    overlayColor: MaterialStateProperty.all(Colors.green),
+    textStyle: MaterialStateProperty.all(
+      textStyle.labelMedium!.copyWith(color: Colors.white),
+    ),
+  ),
+);
