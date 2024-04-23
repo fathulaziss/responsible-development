@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:responsible_development/models/project_model.dart';
 
-class MyProjectModel {
-  MyProjectModel({this.userId, this.percentage, this.project});
+class MyProjectModel extends Equatable {
+  const MyProjectModel({this.userId, this.percentage, this.project});
 
   factory MyProjectModel.fromMap(Map<String, dynamic> map) {
     return MyProjectModel(
@@ -45,9 +46,9 @@ class MyProjectModel {
     );
   }
 
-  String? userId;
-  double? percentage;
-  ProjectModel? project;
+  final String? userId;
+  final double? percentage;
+  final ProjectModel? project;
 
   Map<String, dynamic> toMap() {
     return {
@@ -69,4 +70,7 @@ class MyProjectModel {
       'project_location': jsonEncode(project?.location),
     };
   }
+
+  @override
+  List<Object?> get props => [userId, percentage, project];
 }

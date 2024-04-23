@@ -10,9 +10,21 @@ class ActivityProvider extends ChangeNotifier {
 
   List<MyProjectModel> get listMyProject => _listMyProject;
 
-  MyProjectModel _selectedProject = MyProjectModel();
+  MyProjectModel _selectedProject = const MyProjectModel();
 
   MyProjectModel get selectedProject => _selectedProject;
+
+  DateTime? _selectedDate;
+
+  DateTime? get selectedDate => _selectedDate;
+
+  TimeOfDay? _selectedTimeStart;
+
+  TimeOfDay? get selectedTimeStart => _selectedTimeStart;
+
+  TimeOfDay? _selectedTimeFinish;
+
+  TimeOfDay? get selectedTimeFinish => _selectedTimeFinish;
 
   Future<void> getMyProject(BuildContext context) async {
     if (_listMyProject.isEmpty) {
@@ -30,13 +42,37 @@ class ActivityProvider extends ChangeNotifier {
       }
     }
 
-    _selectedProject = MyProjectModel();
+    _selectedProject = const MyProjectModel();
+    _selectedDate = null;
+    _selectedTimeStart = null;
+    _selectedTimeFinish = null;
   }
 
   void setSelectedProject(Object? value) {
     if (value != null) {
       final data = value as MyProjectModel;
       _selectedProject = data;
+      notifyListeners();
+    }
+  }
+
+  void setSelectedDate(DateTime? value) {
+    if (value != null) {
+      _selectedDate = value;
+      notifyListeners();
+    }
+  }
+
+  void setSelectedTimeStart(TimeOfDay? value) {
+    if (value != null) {
+      _selectedTimeStart = value;
+      notifyListeners();
+    }
+  }
+
+  void setSelectedTimeFinish(TimeOfDay? value) {
+    if (value != null) {
+      _selectedTimeFinish = value;
       notifyListeners();
     }
   }

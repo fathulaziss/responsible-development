@@ -72,6 +72,15 @@ class InputDropdown extends StatelessWidget {
               ),
               child: DropdownButton2(
                 underline: const SizedBox(),
+                dropdownStyleData: DropdownStyleData(
+                  decoration: BoxDecoration(
+                    color: (utilityProvider.isDarkTheme ||
+                            MediaQuery.of(context).platformBrightness ==
+                                Brightness.dark)
+                        ? Colors.grey.shade700
+                        : null,
+                  ),
+                ),
                 customButton: Row(
                   children: [
                     Expanded(
