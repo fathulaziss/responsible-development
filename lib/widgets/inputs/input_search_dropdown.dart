@@ -302,9 +302,7 @@ class _InputSearchDropdownState extends State<InputSearchDropdown> {
                   controller: widget.controller,
                   itemBuilder: widget.itemBuilder,
                   onSelected: widget.onSelected,
-                  suggestionsCallback: (search) {
-                    return widget.suggestionsCallback(search);
-                  },
+                  suggestionsCallback: widget.suggestionsCallback,
                   emptyBuilder: (context) {
                     return const SizedBox();
                   },

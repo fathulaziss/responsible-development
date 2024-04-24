@@ -11,9 +11,7 @@ class LoginDataModel {
       user: map['user'] != null ? UserModel.fromMap(map['user']) : UserModel(),
       access: map['access'] != null
           ? List<AccessModel>.from(
-              (map['access'] as List).map((e) {
-                return AccessModel.fromMap(e);
-              }),
+              (map['access'] as List).map((e) => AccessModel.fromMap),
             )
           : <AccessModel>[],
     );
