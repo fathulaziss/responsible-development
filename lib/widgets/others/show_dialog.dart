@@ -60,7 +60,7 @@ void showDialogCustom(
                 contentPadding ?? const EdgeInsets.symmetric(horizontal: 24),
             actionsPadding:
                 actionPadding ?? const EdgeInsets.fromLTRB(24, 12, 24, 16),
-            insetPadding: const EdgeInsets.all(24),
+            insetPadding: const EdgeInsets.all(32),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             titleTextStyle: titleStyle ??

@@ -106,7 +106,12 @@ class _ActivityViewState extends State<ActivityView> {
                         context,
                         title: 'Konfirmasi',
                         desc: 'Apakah data yang Anda masukkan sudah sesuai ?',
-                        onTapPositif: () {},
+                        onTapPositif: () {
+                          activityProvider.save(
+                            context,
+                            descriptionController.text,
+                          );
+                        },
                       );
                     },
                   ),

@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:responsible_development/common/colors.dart';
+import 'package:responsible_development/database/activity_database.dart';
 import 'package:responsible_development/database/my_project_database.dart';
 import 'package:responsible_development/database/user_database.dart';
+import 'package:responsible_development/models/activity_model.dart';
 import 'package:responsible_development/models/my_project_model.dart';
+import 'package:responsible_development/models/user_model.dart';
+import 'package:responsible_development/services/navigation_service.dart';
+import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/others/loading_indicator.dart';
+import 'package:responsible_development/widgets/others/show_dialog.dart';
 
 class ActivityProvider extends ChangeNotifier {
+  UserModel _user = UserModel();
+
+  UserModel get user => _user;
+
   List<MyProjectModel> _listMyProject = [];
 
   List<MyProjectModel> get listMyProject => _listMyProject;
@@ -32,7 +43,7 @@ class ActivityProvider extends ChangeNotifier {
         widgetBuilder: (progress) => const LoadingIndicatorDefault(),
       );
 
-      final user = await UserDatabase.selectData();
+      _user = await UserDatabase.selectData();
       final data = await MyProjectDatabase.selectData(user);
       _listMyProject = data;
       notifyListeners();
@@ -75,5 +86,41 @@ class ActivityProvider extends ChangeNotifier {
       _selectedTimeFinish = value;
       notifyListeners();
     }
+  }
+
+  Future<void> save(BuildContext context, String description) async {
+    context.loaderOverlay.show(
+      widgetBuilder: (progress) => const LoadingIndicatorDefault(),
+    );
+
+    final data = ActivityModel(
+      id: AppUtils.generateActivityId(),
+      date: AppUtils.convertDateTime(DateTime.now()),
+      projectId: selectedProject.project?.id ?? '',
+      projectName: selectedProject.project?.name ?? '',
+      startTime:
+          '${selectedTimeStart?.hour.toString().padLeft(2, '0')}:${selectedTimeStart?.minute.toString().padLeft(2, '0')}',
+      finishTime:
+          '${selectedTimeFinish?.hour.toString().padLeft(2, '0')}:${selectedTimeFinish?.minute.toString().padLeft(2, '0')}',
+      description: description,
+      userId: user.id ?? '',
+      createdAt: AppUtils.convertDateTime(DateTime.now()),
+    );
+
+    await ActivityDatabase.insertData(data);
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (context.mounted) {
+      context.loaderOverlay.hide();
+
+      showToast(
+        context,
+        message: 'Data Berhasil Disimpan',
+        backgroundColor: AppColor.success,
+      );
+    }
+
+    NavigationService.pop();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:responsible_development/database/activity_database.dart';
 import 'package:responsible_development/database/my_project_database.dart';
 import 'package:responsible_development/database/project_database.dart';
 import 'package:responsible_development/database/user_database.dart';
@@ -33,11 +34,13 @@ class AppDatabase {
     await UserDatabase.createTable(db);
     await ProjectDatabase.createTable(db);
     await MyProjectDatabase.createTable(db);
+    await ActivityDatabase.createTable(db);
   }
 
   Future<void> deleteDatabase() async {
     await UserDatabase.deleteTable();
     await ProjectDatabase.deleteTable();
     await MyProjectDatabase.deleteTable();
+    await ActivityDatabase.deleteTable();
   }
 }
