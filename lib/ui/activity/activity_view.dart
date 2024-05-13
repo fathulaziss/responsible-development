@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsible_development/models/my_project_model.dart';
 import 'package:responsible_development/provider/activity_provider.dart';
+import 'package:responsible_development/provider/history_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
+import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/buttons/button_primary.dart';
 import 'package:responsible_development/widgets/inputs/input_date.dart';
 import 'package:responsible_development/widgets/inputs/input_dropdown.dart';
@@ -106,11 +108,17 @@ class _ActivityViewState extends State<ActivityView> {
                         context,
                         title: 'Konfirmasi',
                         desc: 'Apakah data yang Anda masukkan sudah sesuai ?',
-                        onTapPositif: () {
-                          activityProvider.save(
+                        onTapPositif: () async {
+                          await activityProvider.save(
                             context,
                             descriptionController.text,
                           );
+                          NavigationService.pop();
+                          if (context.mounted) {
+                            await context
+                                .read<HistoryProvider>()
+                                .getHistory(context);
+                          }
                         },
                       );
                     },
@@ -169,7 +177,7 @@ class _ActivityViewState extends State<ActivityView> {
                           hintText: 'Pilih waktu memulai aktivitas',
                           onChanged: (value) {
                             activityProvider.setSelectedTimeStart(value);
-                            log('check Waktu Mulai : ${value?.hour.toString().padLeft(2, '0')}:${value?.minute.toString().padLeft(2, '0')}');
+                            log('check Waktu Mulai : ${AppUtils.convertTimeOfDayToString(value)}');
                           },
                         ),
                         InputTime(
@@ -177,7 +185,7 @@ class _ActivityViewState extends State<ActivityView> {
                           hintText: 'Pilih waktu menyelesaikan aktivitas',
                           onChanged: (value) {
                             activityProvider.setSelectedTimeFinish(value);
-                            log('check Waktu Selesai : ${value?.hour.toString().padLeft(2, '0')}:${value?.minute.toString().padLeft(2, '0')}');
+                            log('check Waktu Selesai : ${AppUtils.convertTimeOfDayToString(value)}');
                           },
                         ),
                         InputPrimary(

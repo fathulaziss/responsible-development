@@ -26,7 +26,37 @@ class AppUtils {
     return activityId;
   }
 
-  static String convertDateTime(DateTime dateTime) {
+  static String convertDateTimeToString(DateTime dateTime) {
     return DateFormat('dd-MM-yyyy HH:mm:ss').format(dateTime);
+  }
+
+  static DateTime convertStringToDateTime(String dateTime) {
+    return DateFormat('dd-MM-yyyy HH:mm:ss').parse(dateTime);
+  }
+
+  static String convertTimeOfDayToString(TimeOfDay? timeOfDay) {
+    return '${timeOfDay?.hour.toString().padLeft(2, '0')}:${timeOfDay?.minute.toString().padLeft(2, '0')}';
+  }
+
+  static TimeOfDay convertStringToTimeOfDay(String timeOfDay) {
+    return TimeOfDay(
+      hour: int.parse(timeOfDay.split(':')[0]),
+      minute: int.parse(timeOfDay.split(':')[1]),
+    );
+  }
+
+  static String getDuration(
+    String dateTime,
+    String timeStart,
+    String timeFinish,
+  ) {
+    final date = dateTime.split(' ');
+    final dateTimeStart =
+        DateFormat('dd-MM-yyyy HH:mm').parse('${date[0]} $timeStart');
+    final dateTimeFinish =
+        DateFormat('dd-MM-yyyy HH:mm').parse('${date[0]} $timeFinish');
+    final duration = dateTimeFinish.difference(dateTimeStart);
+    final durationConvert = duration.toString().split(':');
+    return '${durationConvert[0]}j ${durationConvert[1].padLeft(2, '0')}m';
   }
 }

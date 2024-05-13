@@ -17,6 +17,7 @@ class ActivityDatabase {
         ${ActivityEntity.startTime} TEXT,
         ${ActivityEntity.finishTime} TEXT,
         ${ActivityEntity.description} TEXT,
+        ${ActivityEntity.isSynchronize} INTEGER,
         ${ActivityEntity.createdAt} TEXT,
         ${ActivityEntity.updatedAt} TEXT)
     ''');
@@ -44,6 +45,18 @@ class ActivityDatabase {
     final db = await AppDatabase().database;
     if (db != null) {
       await db.insert(activityTable, data.toMap());
+    }
+  }
+
+  static Future<void> uploadData(ActivityModel data) async {
+    final db = await AppDatabase().database;
+    if (db != null) {
+      await db.update(
+        activityTable,
+        data.toMap(),
+        where: '${ActivityEntity.id}=?',
+        whereArgs: [data.id],
+      );
     }
   }
 

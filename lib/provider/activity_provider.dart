@@ -7,7 +7,6 @@ import 'package:responsible_development/database/user_database.dart';
 import 'package:responsible_development/models/activity_model.dart';
 import 'package:responsible_development/models/my_project_model.dart';
 import 'package:responsible_development/models/user_model.dart';
-import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/others/loading_indicator.dart';
 import 'package:responsible_development/widgets/others/show_dialog.dart';
@@ -95,16 +94,14 @@ class ActivityProvider extends ChangeNotifier {
 
     final data = ActivityModel(
       id: AppUtils.generateActivityId(),
-      date: AppUtils.convertDateTime(DateTime.now()),
+      date: AppUtils.convertDateTimeToString(DateTime.now()),
       projectId: selectedProject.project?.id ?? '',
       projectName: selectedProject.project?.name ?? '',
-      startTime:
-          '${selectedTimeStart?.hour.toString().padLeft(2, '0')}:${selectedTimeStart?.minute.toString().padLeft(2, '0')}',
-      finishTime:
-          '${selectedTimeFinish?.hour.toString().padLeft(2, '0')}:${selectedTimeFinish?.minute.toString().padLeft(2, '0')}',
+      startTime: AppUtils.convertTimeOfDayToString(selectedTimeStart),
+      finishTime: AppUtils.convertTimeOfDayToString(selectedTimeFinish),
       description: description,
       userId: user.id ?? '',
-      createdAt: AppUtils.convertDateTime(DateTime.now()),
+      createdAt: AppUtils.convertDateTimeToString(DateTime.now()),
     );
 
     await ActivityDatabase.insertData(data);
@@ -120,7 +117,5 @@ class ActivityProvider extends ChangeNotifier {
         backgroundColor: AppColor.success,
       );
     }
-
-    NavigationService.pop();
   }
 }

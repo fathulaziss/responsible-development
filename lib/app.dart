@@ -8,6 +8,7 @@ import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/models/project_model.dart';
 import 'package:responsible_development/provider/activity_provider.dart';
 import 'package:responsible_development/provider/auth_provider.dart';
+import 'package:responsible_development/provider/history_provider.dart';
 import 'package:responsible_development/provider/my_project_provider.dart';
 import 'package:responsible_development/provider/profile_provider.dart';
 import 'package:responsible_development/provider/project_provider.dart';
@@ -67,6 +68,9 @@ class _AppState extends State<App> {
         ),
         ChangeNotifierProvider<ActivityProvider>(
           create: (context) => ActivityProvider(),
+        ),
+        ChangeNotifierProvider<HistoryProvider>(
+          create: (context) => HistoryProvider(),
         ),
       ],
       child: Consumer<UtilityProvider>(

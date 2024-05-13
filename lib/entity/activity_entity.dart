@@ -7,6 +7,7 @@ class ActivityEntity {
   static String startTime = 'start_time';
   static String finishTime = 'finish_time';
   static String description = 'description';
+  static String isSynchronize = 'is_synchronize';
   static String createdAt = 'created_at';
   static String updatedAt = 'updated_at';
 }
