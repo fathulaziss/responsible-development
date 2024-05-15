@@ -201,12 +201,26 @@ class _HistoryViewState extends State<HistoryView> {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 45, right: 16),
                         child: ButtonPrimary(
-                          size: const Size(130, 40),
-                          label: 'Upload Data',
+                          label: '',
+                          size: const Size(50, 50),
+                          padding: const EdgeInsets.all(14),
+                          radius: 50,
                           onPressed: () {
                             historyProvider.uploadData(context);
                           },
+                          child: const Icon(
+                            Icons.cloud_upload_outlined,
+                            size: 30,
+                            color: Colors.white,
+                          ),
                         ),
+                        // child: ButtonPrimary(
+                        //   size: const Size(130, 40),
+                        //   label: 'Upload Data',
+                        //   onPressed: () {
+                        //     historyProvider.uploadData(context);
+                        //   },
+                        // ),
                       ),
                     ),
                   ],

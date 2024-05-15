@@ -12,6 +12,7 @@ class ButtonPrimary extends StatelessWidget {
     this.backgroundColor,
     this.radius,
     this.padding,
+    this.child,
   });
 
   final String label;
@@ -22,6 +23,7 @@ class ButtonPrimary extends StatelessWidget {
   final double? radius;
   final EdgeInsets? padding;
   final Function() onPressed;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +43,13 @@ class ButtonPrimary extends StatelessWidget {
         ),
         padding: MaterialStateProperty.all(padding),
       ),
-      child: Text(
-        label,
-        style: labelStyle ??
-            textStyle.titleSmall!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.w800),
-      ),
+      child: child ??
+          Text(
+            label,
+            style: labelStyle ??
+                textStyle.titleSmall!
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+          ),
     );
   }
 }
