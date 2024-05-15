@@ -48,6 +48,25 @@ class ActivityDatabase {
     }
   }
 
+  static Future<List<ActivityModel>> selectDataUnUpload() async {
+    final db = await AppDatabase().database;
+
+    if (db != null) {
+      final user = await UserDatabase.selectData();
+      final mapList = await db.query(
+        activityTable,
+        where:
+            '${ActivityEntity.userId}=? AND ${ActivityEntity.isSynchronize}=?',
+        whereArgs: [user.id, 0],
+      );
+
+      final data = List<ActivityModel>.from(mapList.map(ActivityModel.fromMap));
+      return data;
+    }
+
+    return [];
+  }
+
   static Future<void> uploadData(ActivityModel data) async {
     final db = await AppDatabase().database;
     if (db != null) {

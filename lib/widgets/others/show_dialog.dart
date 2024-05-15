@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/provider/utility_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
+import 'package:responsible_development/widgets/buttons/button_primary.dart';
 import 'package:responsible_development/widgets/buttons/button_text.dart';
-import 'package:responsible_development/widgets/others/horizontal_space.dart';
 import 'package:toast/toast.dart';
 
 void showToast(
@@ -111,16 +111,22 @@ void showDialogOption(
       },
     ),
     actions: [
-      ButtonText(
+      ButtonPrimary(
         label: labelButtonNegatif,
-        labelStyle: textStyle.labelSmall!.copyWith(color: Colors.red),
-        onTap: NavigationService.pop,
+        size: const Size(50, 30),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        labelStyle: textStyle.labelSmall!.copyWith(color: Colors.white),
+        backgroundColor: Colors.red,
+        overlayColor: Colors.redAccent,
+        onPressed: NavigationService.pop,
       ),
-      const HorizontalSpace(width: 12),
-      ButtonText(
+      ButtonPrimary(
         label: labelButtonPositif,
-        labelStyle: textStyle.labelSmall!.copyWith(color: Colors.blue),
-        onTap: () {
+        size: const Size(50, 30),
+        labelStyle: textStyle.labelSmall!.copyWith(color: Colors.white),
+        backgroundColor: Colors.blue,
+        overlayColor: Colors.blueAccent,
+        onPressed: () {
           NavigationService.pop();
           onTapPositif();
         },

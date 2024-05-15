@@ -33,7 +33,9 @@ class HistoryProvider extends ChangeNotifier {
       widgetBuilder: (progress) => const LoadingIndicatorDefault(),
     );
 
-    for (final data in listMyHistory) {
+    final listDataUnUpload = await ActivityDatabase.selectDataUnUpload();
+
+    for (final data in listDataUnUpload) {
       final temp = ActivityModel(
         createdAt: data.createdAt,
         date: data.date,
