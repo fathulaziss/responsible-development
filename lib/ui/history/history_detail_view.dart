@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsible_development/common/styles.dart';
+import 'package:responsible_development/database/activity_database.dart';
 import 'package:responsible_development/models/activity_model.dart';
+import 'package:responsible_development/provider/history_provider.dart';
+import 'package:responsible_development/services/navigation_service.dart';
+import 'package:responsible_development/ui/history/history_edit_view.dart';
 import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/buttons/button_primary.dart';
 import 'package:responsible_development/widgets/cards/card_custom.dart';
@@ -39,7 +44,22 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
               padding: const EdgeInsets.all(24),
               child: ButtonPrimary(
                 label: 'Edit',
-                onPressed: () {},
+                onPressed: () async {
+                  final res = await NavigationService.pushNamed(
+                    HistoryEditView.routeName,
+                    arguments: activityData,
+                  );
+
+                  if (res != null) {
+                    activityData = res;
+                    await ActivityDatabase.updateData(activityData);
+                    if (context.mounted) {
+                      await context.read<HistoryProvider>().getHistory(context);
+                    }
+
+                    setState(() {});
+                  }
+                },
               ),
             ),
       body: Padding(
@@ -80,17 +100,20 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
               ),
             ),
             if (activityData.updatedAt.isNotEmpty)
-              Row(
-                children: [
-                  Text('Tanggal Dirubah', style: textStyle.labelSmall),
-                  Expanded(
-                    child: Text(
-                      activityData.updatedAt,
-                      style: textStyle.bodyMedium,
-                      textAlign: TextAlign.end,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  children: [
+                    Text('Tanggal Dirubah', style: textStyle.labelSmall),
+                    Expanded(
+                      child: Text(
+                        activityData.updatedAt,
+                        style: textStyle.bodyMedium,
+                        textAlign: TextAlign.end,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
@@ -141,7 +164,7 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                 ],
               ),
             ),
-            Text('Deskripsi :', style: textStyle.labelSmall),
+            Text('Deskripsi', style: textStyle.labelSmall),
             CardCustom(
               margin: const EdgeInsets.symmetric(vertical: 8),
               padding: const EdgeInsets.all(12),

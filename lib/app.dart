@@ -18,6 +18,7 @@ import 'package:responsible_development/provider/utility_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/activity/activity_view.dart';
 import 'package:responsible_development/ui/history/history_detail_view.dart';
+import 'package:responsible_development/ui/history/history_edit_view.dart';
 import 'package:responsible_development/ui/login/login_view.dart';
 import 'package:responsible_development/ui/main/main_view.dart';
 import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
@@ -144,6 +145,14 @@ class _AppState extends State<App> {
                               as ActivityModel
                           : const ActivityModel();
                   return HistoryDetailView(data: data);
+                },
+                HistoryEditView.routeName: (context) {
+                  final data =
+                      ModalRoute.of(context)!.settings.arguments != null
+                          ? ModalRoute.of(context)!.settings.arguments!
+                              as ActivityModel
+                          : const ActivityModel();
+                  return HistoryEditView(data: data);
                 },
               },
             ),

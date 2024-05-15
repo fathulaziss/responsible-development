@@ -50,7 +50,7 @@ class HistoryProvider extends ChangeNotifier {
         userId: data.userId,
       );
 
-      await ActivityDatabase.uploadData(temp);
+      await ActivityDatabase.updateData(temp);
     }
 
     final data = await ActivityDatabase.selectData();

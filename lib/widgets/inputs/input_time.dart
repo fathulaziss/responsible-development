@@ -8,18 +8,30 @@ class InputTime extends StatefulWidget {
     required this.hintText,
     required this.labelText,
     required this.onChanged,
+    this.controller,
   });
 
   final String hintText;
   final String labelText;
   final ValueSetter<TimeOfDay?> onChanged;
+  final TextEditingController? controller;
 
   @override
   State<InputTime> createState() => _InputTimeState();
 }
 
 class _InputTimeState extends State<InputTime> {
-  final controller = TextEditingController();
+  TextEditingController controller = TextEditingController();
+  TimeOfDay? initialTime;
+
+  @override
+  void initState() {
+    if (widget.controller != null) {
+      controller = widget.controller!;
+      initialTime = AppUtils.convertStringToTimeOfDay(controller.text);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +43,7 @@ class _InputTimeState extends State<InputTime> {
       onTap: () async {
         final res = await showTimePicker(
           context: context,
-          initialTime: TimeOfDay.now(),
+          initialTime: initialTime ?? TimeOfDay.now(),
           initialEntryMode: TimePickerEntryMode.inputOnly,
           helpText: 'Masukkan Waktu',
           confirmText: 'Simpan',

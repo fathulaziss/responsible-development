@@ -67,7 +67,7 @@ class ActivityDatabase {
     return [];
   }
 
-  static Future<void> uploadData(ActivityModel data) async {
+  static Future<void> updateData(ActivityModel data) async {
     final db = await AppDatabase().database;
     if (db != null) {
       await db.update(
