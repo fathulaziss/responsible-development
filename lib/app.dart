@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:responsible_development/common/styles.dart';
+import 'package:responsible_development/models/activity_model.dart';
 import 'package:responsible_development/models/project_model.dart';
 import 'package:responsible_development/provider/activity_provider.dart';
 import 'package:responsible_development/provider/auth_provider.dart';
@@ -16,6 +17,7 @@ import 'package:responsible_development/provider/sync_provider.dart';
 import 'package:responsible_development/provider/utility_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/activity/activity_view.dart';
+import 'package:responsible_development/ui/history/history_detail_view.dart';
 import 'package:responsible_development/ui/login/login_view.dart';
 import 'package:responsible_development/ui/main/main_view.dart';
 import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
@@ -134,6 +136,14 @@ class _AppState extends State<App> {
                               as List<ProjectModel>
                           : <ProjectModel>[];
                   return ProjectSearchView(listMyProject: data);
+                },
+                HistoryDetailView.routeName: (context) {
+                  final data =
+                      ModalRoute.of(context)!.settings.arguments != null
+                          ? ModalRoute.of(context)!.settings.arguments!
+                              as ActivityModel
+                          : const ActivityModel();
+                  return HistoryDetailView(data: data);
                 },
               },
             ),
