@@ -59,101 +59,115 @@ class _HistoryEditViewState extends State<HistoryEditView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Aktivitas'),
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(24),
-        child: ButtonPrimary(
-          label: 'Simpan',
-          onPressed: () {
-            if (descriptionController.text.isEmpty) {
-              showToast(
-                context,
-                message: 'Anda belum mengisi Deskripsi',
-                backgroundColor: Colors.yellow.shade700,
-              );
-              return;
-            }
-
-            showDialogOption(
-              context,
-              title: 'Konfirmasi',
-              desc: 'Apakah data yang Anda edit sudah sesuai ?',
-              onTapPositif: () {
-                final activityDataUpdate = ActivityModel(
-                  createdAt: activityData.createdAt,
-                  date: activityData.date,
-                  description: descriptionController.text,
-                  finishTime:
-                      AppUtils.convertTimeOfDayToString(selectedTimeFinish),
-                  id: activityData.id,
-                  isSynchronize: activityData.isSynchronize,
-                  projectId: activityData.projectId,
-                  projectName: activityData.projectName,
-                  startTime:
-                      AppUtils.convertTimeOfDayToString(selectedTimeStart),
-                  updatedAt: AppUtils.convertDateTimeToString(DateTime.now()),
-                  userId: activityData.userId,
-                );
-                NavigationService.pop(result: activityDataUpdate);
-              },
-            );
-          },
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop == false) {
+          showDialogOption(
+            context,
+            title: 'Konfirmasi',
+            desc:
+                'Data belum tersimpan, apakah Anda yakin untuk keluar dari halaman ini ?',
+            onTapPositif: NavigationService.pop,
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Edit Aktivitas'),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              InputPrimary(
-                labelText: 'Proyek RD',
-                readOnly: true,
-                controller: projectController,
-              ),
-              InputPrimary(
-                labelText: 'Tanggal',
-                readOnly: true,
-                controller: dateController,
-              ),
-              InputTime(
-                labelText: 'Waktu Mulai',
-                hintText: 'Pilih waktu memulai aktivitas',
-                controller: timeStartController,
-                onChanged: (value) {
-                  if (value != null) {
-                    selectedTimeStart = value;
-                  }
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(24),
+          child: ButtonPrimary(
+            label: 'Simpan',
+            onPressed: () {
+              if (descriptionController.text.isEmpty) {
+                showToast(
+                  context,
+                  message: 'Anda belum mengisi Deskripsi',
+                  backgroundColor: Colors.yellow.shade700,
+                );
+                return;
+              }
 
-                  setState(() {});
-                  log('check Waktu Mulai : ${AppUtils.convertTimeOfDayToString(selectedTimeStart)}');
+              showDialogOption(
+                context,
+                title: 'Konfirmasi',
+                desc: 'Apakah data yang Anda edit sudah sesuai ?',
+                onTapPositif: () {
+                  final activityDataUpdate = ActivityModel(
+                    createdAt: activityData.createdAt,
+                    date: activityData.date,
+                    description: descriptionController.text,
+                    finishTime:
+                        AppUtils.convertTimeOfDayToString(selectedTimeFinish),
+                    id: activityData.id,
+                    isSynchronize: activityData.isSynchronize,
+                    projectId: activityData.projectId,
+                    projectName: activityData.projectName,
+                    startTime:
+                        AppUtils.convertTimeOfDayToString(selectedTimeStart),
+                    updatedAt: AppUtils.convertDateTimeToString(DateTime.now()),
+                    userId: activityData.userId,
+                  );
+                  NavigationService.pop(result: activityDataUpdate);
                 },
-              ),
-              InputTime(
-                labelText: 'Waktu Selesai',
-                hintText: 'Pilih waktu menyelesaikan aktivitas',
-                controller: timeFinishController,
-                onChanged: (value) {
-                  if (value != null) {
-                    selectedTimeFinish = value;
-                  }
+              );
+            },
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(12),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                InputPrimary(
+                  labelText: 'Proyek RD',
+                  readOnly: true,
+                  controller: projectController,
+                ),
+                InputPrimary(
+                  labelText: 'Tanggal',
+                  readOnly: true,
+                  controller: dateController,
+                ),
+                InputTime(
+                  labelText: 'Waktu Mulai',
+                  hintText: 'Pilih waktu memulai aktivitas',
+                  controller: timeStartController,
+                  onChanged: (value) {
+                    if (value != null) {
+                      selectedTimeStart = value;
+                    }
 
-                  setState(() {});
-                  log('check Waktu Selesai : ${AppUtils.convertTimeOfDayToString(selectedTimeFinish)}');
-                },
-              ),
-              InputPrimary(
-                controller: descriptionController,
-                labelText: 'Deskripsi',
-                hintText: 'Masukkan Deskripsi',
-                maxLines: 10,
-                keyboardType: TextInputType.multiline,
-                validator: (value) => null,
-              ),
-            ],
+                    setState(() {});
+                    log('check Waktu Mulai : ${AppUtils.convertTimeOfDayToString(selectedTimeStart)}');
+                  },
+                ),
+                InputTime(
+                  labelText: 'Waktu Selesai',
+                  hintText: 'Pilih waktu menyelesaikan aktivitas',
+                  controller: timeFinishController,
+                  onChanged: (value) {
+                    if (value != null) {
+                      selectedTimeFinish = value;
+                    }
+
+                    setState(() {});
+                    log('check Waktu Selesai : ${AppUtils.convertTimeOfDayToString(selectedTimeFinish)}');
+                  },
+                ),
+                InputPrimary(
+                  controller: descriptionController,
+                  labelText: 'Deskripsi',
+                  hintText: 'Masukkan Deskripsi',
+                  maxLines: 10,
+                  keyboardType: TextInputType.multiline,
+                  validator: (value) => null,
+                ),
+              ],
+            ),
           ),
         ),
       ),

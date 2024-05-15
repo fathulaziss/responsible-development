@@ -45,161 +45,175 @@ class _ActivityViewState extends State<ActivityView> {
   Widget build(BuildContext context) {
     return Consumer<ActivityProvider>(
       builder: (context, activityProvider, _) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Aktivitas Proyek'),
-            iconTheme: const IconThemeData(color: Colors.white),
-          ),
-          bottomNavigationBar: activityProvider.listMyProject.isEmpty
-              ? const SizedBox()
-              : Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: ButtonPrimary(
-                    label: 'Simpan',
-                    onPressed: () {
-                      if (activityProvider.selectedProject ==
-                          const MyProjectModel()) {
-                        showToast(
-                          context,
-                          message: 'Anda belum memilih Proyek RD',
-                          backgroundColor: Colors.yellow.shade700,
-                        );
-                        return;
-                      }
-
-                      if (activityProvider.selectedDate == null) {
-                        showToast(
-                          context,
-                          message: 'Anda belum memilih Tanggal',
-                          backgroundColor: Colors.yellow.shade700,
-                        );
-                        return;
-                      }
-
-                      if (activityProvider.selectedTimeStart == null) {
-                        showToast(
-                          context,
-                          message: 'Anda belum memilih Waktu Memulai Proyek',
-                          backgroundColor: Colors.yellow.shade700,
-                        );
-                        return;
-                      }
-
-                      if (activityProvider.selectedTimeFinish == null) {
-                        showToast(
-                          context,
-                          message:
-                              'Anda belum memilih Waktu Menyelesaikan Proyek',
-                          backgroundColor: Colors.yellow.shade700,
-                        );
-                        return;
-                      }
-
-                      if (descriptionController.text.isEmpty) {
-                        showToast(
-                          context,
-                          message: 'Anda belum mengisi Deskripsi',
-                          backgroundColor: Colors.yellow.shade700,
-                        );
-                        return;
-                      }
-
-                      showDialogOption(
-                        context,
-                        title: 'Konfirmasi',
-                        desc: 'Apakah data yang Anda masukkan sudah sesuai ?',
-                        onTapPositif: () async {
-                          await activityProvider.save(
-                            context,
-                            descriptionController.text,
-                          );
-                          NavigationService.pop();
-                          if (context.mounted) {
-                            await context
-                                .read<HistoryProvider>()
-                                .getHistory(context);
-                          }
-                        },
-                      );
-                    },
-                  ),
-                ),
-          body: activityProvider.listMyProject.isEmpty
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+        return PopScope(
+          canPop: false,
+          onPopInvoked: (didPop) async {
+            if (didPop == false) {
+              showDialogOption(
+                context,
+                title: 'Konfirmasi',
+                desc:
+                    'Data belum tersimpan, apakah Anda yakin untuk keluar dari halaman ini ?',
+                onTapPositif: NavigationService.pop,
+              );
+            }
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Aktivitas Proyek'),
+              iconTheme: const IconThemeData(color: Colors.white),
+            ),
+            bottomNavigationBar: activityProvider.listMyProject.isEmpty
+                ? const SizedBox()
+                : Padding(
+                    padding: const EdgeInsets.all(24),
                     child: ButtonPrimary(
-                      label: 'Pilih Proyek RD',
-                      onPressed: () async {
-                        await NavigationService.pushNamed(
-                          MyProjectAddView.routeName,
-                        );
-                        if (context.mounted) {
-                          await activityProvider.getMyProject(context);
+                      label: 'Simpan',
+                      onPressed: () {
+                        if (activityProvider.selectedProject ==
+                            const MyProjectModel()) {
+                          showToast(
+                            context,
+                            message: 'Anda belum memilih Proyek RD',
+                            backgroundColor: Colors.yellow.shade700,
+                          );
+                          return;
                         }
+
+                        if (activityProvider.selectedDate == null) {
+                          showToast(
+                            context,
+                            message: 'Anda belum memilih Tanggal',
+                            backgroundColor: Colors.yellow.shade700,
+                          );
+                          return;
+                        }
+
+                        if (activityProvider.selectedTimeStart == null) {
+                          showToast(
+                            context,
+                            message: 'Anda belum memilih Waktu Memulai Proyek',
+                            backgroundColor: Colors.yellow.shade700,
+                          );
+                          return;
+                        }
+
+                        if (activityProvider.selectedTimeFinish == null) {
+                          showToast(
+                            context,
+                            message:
+                                'Anda belum memilih Waktu Menyelesaikan Proyek',
+                            backgroundColor: Colors.yellow.shade700,
+                          );
+                          return;
+                        }
+
+                        if (descriptionController.text.isEmpty) {
+                          showToast(
+                            context,
+                            message: 'Anda belum mengisi Deskripsi',
+                            backgroundColor: Colors.yellow.shade700,
+                          );
+                          return;
+                        }
+
+                        showDialogOption(
+                          context,
+                          title: 'Konfirmasi',
+                          desc: 'Apakah data yang Anda masukkan sudah sesuai ?',
+                          onTapPositif: () async {
+                            await activityProvider.save(
+                              context,
+                              descriptionController.text,
+                            );
+                            NavigationService.pop();
+                            if (context.mounted) {
+                              await context
+                                  .read<HistoryProvider>()
+                                  .getHistory(context);
+                            }
+                          },
+                        );
                       },
                     ),
                   ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const VerticalSpace(height: 12),
-                        InputDropdown(
-                          items: [
-                            ...activityProvider.listMyProject.map(
-                              (item) {
-                                return DropdownMenuItem<MyProjectModel>(
-                                  value: item,
-                                  child: InputDropdownItem(
-                                    value: '${item.project?.name}',
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                          labelText: 'Proyek RD',
-                          hintText: 'Pilih Proyek RD',
-                          selectedItem:
-                              '${activityProvider.selectedProject.project != null ? activityProvider.selectedProject.project?.name : ''}',
-                          onChanged: activityProvider.setSelectedProject,
-                        ),
-                        const VerticalSpace(height: 12),
-                        InputDate(
-                          labelText: 'Tanggal',
-                          hintText: 'Pilih Tanggal',
-                          onChanged: activityProvider.setSelectedDate,
-                        ),
-                        InputTime(
-                          labelText: 'Waktu Mulai',
-                          hintText: 'Pilih waktu memulai aktivitas',
-                          onChanged: (value) {
-                            activityProvider.setSelectedTimeStart(value);
-                            log('check Waktu Mulai : ${AppUtils.convertTimeOfDayToString(value)}');
-                          },
-                        ),
-                        InputTime(
-                          labelText: 'Waktu Selesai',
-                          hintText: 'Pilih waktu menyelesaikan aktivitas',
-                          onChanged: (value) {
-                            activityProvider.setSelectedTimeFinish(value);
-                            log('check Waktu Selesai : ${AppUtils.convertTimeOfDayToString(value)}');
-                          },
-                        ),
-                        InputPrimary(
-                          controller: descriptionController,
-                          labelText: 'Deskripsi',
-                          hintText: 'Masukkan Deskripsi',
-                          maxLines: 10,
-                          keyboardType: TextInputType.multiline,
-                          validator: (value) => null,
-                        ),
-                      ],
+            body: activityProvider.listMyProject.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: ButtonPrimary(
+                        label: 'Pilih Proyek RD',
+                        onPressed: () async {
+                          await NavigationService.pushNamed(
+                            MyProjectAddView.routeName,
+                          );
+                          if (context.mounted) {
+                            await activityProvider.getMyProject(context);
+                          }
+                        },
+                      ),
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const VerticalSpace(height: 12),
+                          InputDropdown(
+                            items: [
+                              ...activityProvider.listMyProject.map(
+                                (item) {
+                                  return DropdownMenuItem<MyProjectModel>(
+                                    value: item,
+                                    child: InputDropdownItem(
+                                      value: '${item.project?.name}',
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                            labelText: 'Proyek RD',
+                            hintText: 'Pilih Proyek RD',
+                            selectedItem:
+                                '${activityProvider.selectedProject.project != null ? activityProvider.selectedProject.project?.name : ''}',
+                            onChanged: activityProvider.setSelectedProject,
+                          ),
+                          const VerticalSpace(height: 12),
+                          InputDate(
+                            labelText: 'Tanggal',
+                            hintText: 'Pilih Tanggal',
+                            onChanged: activityProvider.setSelectedDate,
+                          ),
+                          InputTime(
+                            labelText: 'Waktu Mulai',
+                            hintText: 'Pilih waktu memulai aktivitas',
+                            onChanged: (value) {
+                              activityProvider.setSelectedTimeStart(value);
+                              log('check Waktu Mulai : ${AppUtils.convertTimeOfDayToString(value)}');
+                            },
+                          ),
+                          InputTime(
+                            labelText: 'Waktu Selesai',
+                            hintText: 'Pilih waktu menyelesaikan aktivitas',
+                            onChanged: (value) {
+                              activityProvider.setSelectedTimeFinish(value);
+                              log('check Waktu Selesai : ${AppUtils.convertTimeOfDayToString(value)}');
+                            },
+                          ),
+                          InputPrimary(
+                            controller: descriptionController,
+                            labelText: 'Deskripsi',
+                            hintText: 'Masukkan Deskripsi',
+                            maxLines: 10,
+                            keyboardType: TextInputType.multiline,
+                            validator: (value) => null,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+          ),
         );
       },
     );
