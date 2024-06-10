@@ -32,28 +32,26 @@ final darkTheme = ThemeData(
   cardTheme: CardTheme(surfaceTintColor: AppColor.backgroundDark),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all(AppColor.primary),
-      surfaceTintColor: MaterialStateProperty.all(AppColor.primary),
+      backgroundColor: WidgetStateProperty.all(AppColor.primary),
+      surfaceTintColor: WidgetStateProperty.all(AppColor.primary),
       overlayColor:
-          MaterialStateProperty.all(Colors.grey.shade300.withOpacity(0.5)),
+          WidgetStateProperty.all(Colors.grey.shade300.withOpacity(0.5)),
     ),
   ),
   fontFamily: 'DIN Pro',
   indicatorColor: AppColor.indicator,
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all(AppColor.primary),
+      backgroundColor: WidgetStateProperty.all(AppColor.primary),
     ),
   ),
   scaffoldBackgroundColor: Colors.black,
   textTheme: textStyle,
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
-      backgroundColor:
-          MaterialStateColor.resolveWith((states) => Colors.orange),
-      overlayColor:
-          MaterialStateColor.resolveWith((states) => Colors.deepOrange),
+      foregroundColor: WidgetStateColor.resolveWith((states) => Colors.white),
+      backgroundColor: WidgetStateColor.resolveWith((states) => Colors.orange),
+      overlayColor: WidgetStateColor.resolveWith((states) => Colors.deepOrange),
     ),
   ),
   timePickerTheme: timePickerTheme,
@@ -77,27 +75,25 @@ final lightTheme = ThemeData(
       const CardTheme(color: Colors.white, surfaceTintColor: Colors.white),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all(AppColor.primary),
-      surfaceTintColor: MaterialStateProperty.all(AppColor.primary),
-      overlayColor: MaterialStateProperty.all(AppColor.primaryLight),
+      backgroundColor: WidgetStateProperty.all(AppColor.primary),
+      surfaceTintColor: WidgetStateProperty.all(AppColor.primary),
+      overlayColor: WidgetStateProperty.all(AppColor.primaryLight),
     ),
   ),
   fontFamily: 'DIN Pro',
   indicatorColor: AppColor.indicator,
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all(AppColor.primary),
+      backgroundColor: WidgetStateProperty.all(AppColor.primary),
     ),
   ),
   scaffoldBackgroundColor: AppColor.scaffoldBackground,
   textTheme: textStyle,
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
-      backgroundColor:
-          MaterialStateColor.resolveWith((states) => Colors.orange),
-      overlayColor:
-          MaterialStateColor.resolveWith((states) => Colors.deepOrange),
+      foregroundColor: WidgetStateColor.resolveWith((states) => Colors.white),
+      backgroundColor: WidgetStateColor.resolveWith((states) => Colors.orange),
+      overlayColor: WidgetStateColor.resolveWith((states) => Colors.deepOrange),
     ),
   ),
   timePickerTheme: timePickerTheme,
@@ -147,14 +143,14 @@ final timePickerTheme = TimePickerThemeData(
     borderRadius: BorderRadius.all(Radius.circular(8)),
     side: BorderSide(color: Colors.orange, width: 4),
   ),
-  hourMinuteColor: MaterialStateColor.resolveWith(
-    (states) => states.contains(MaterialState.selected)
+  hourMinuteColor: WidgetStateColor.resolveWith(
+    (states) => states.contains(WidgetState.selected)
         ? Colors.orange
         : Colors.blueGrey.shade800,
   ),
-  hourMinuteTextColor: MaterialStateColor.resolveWith(
+  hourMinuteTextColor: WidgetStateColor.resolveWith(
     (states) =>
-        states.contains(MaterialState.selected) ? Colors.white : Colors.orange,
+        states.contains(WidgetState.selected) ? Colors.white : Colors.orange,
   ),
   dialHandColor: Colors.blueGrey.shade700,
   dialBackgroundColor: Colors.blueGrey.shade800,
@@ -168,50 +164,50 @@ final timePickerTheme = TimePickerThemeData(
   ),
   dialTextStyle: textStyle.labelMedium!.copyWith(color: Colors.white),
   cancelButtonStyle: ButtonStyle(
-    shape: MaterialStateProperty.all(
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
-    backgroundColor: MaterialStateProperty.all(Colors.red),
-    overlayColor: MaterialStateProperty.all(Colors.red),
-    textStyle: MaterialStateProperty.all(
+    backgroundColor: WidgetStateProperty.all(Colors.red),
+    overlayColor: WidgetStateProperty.all(Colors.red),
+    textStyle: WidgetStateProperty.all(
       textStyle.labelMedium!.copyWith(color: Colors.white),
     ),
   ),
   confirmButtonStyle: ButtonStyle(
-    shape: MaterialStateProperty.all(
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
-    backgroundColor: MaterialStateProperty.all(Colors.green),
-    overlayColor: MaterialStateProperty.all(Colors.green),
-    textStyle: MaterialStateProperty.all(
+    backgroundColor: WidgetStateProperty.all(Colors.green),
+    overlayColor: WidgetStateProperty.all(Colors.green),
+    textStyle: WidgetStateProperty.all(
       textStyle.labelMedium!.copyWith(color: Colors.white),
     ),
   ),
-  dialTextColor: MaterialStateColor.resolveWith(
+  dialTextColor: WidgetStateColor.resolveWith(
     (states) =>
-        states.contains(MaterialState.selected) ? Colors.orange : Colors.white,
+        states.contains(WidgetState.selected) ? Colors.orange : Colors.white,
   ),
   entryModeIconColor: Colors.orange,
 );
 
 final datePickerTheme = DatePickerThemeData(
   cancelButtonStyle: ButtonStyle(
-    shape: MaterialStateProperty.all(
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
-    backgroundColor: MaterialStateProperty.all(Colors.red),
-    overlayColor: MaterialStateProperty.all(Colors.red),
-    textStyle: MaterialStateProperty.all(
+    backgroundColor: WidgetStateProperty.all(Colors.red),
+    overlayColor: WidgetStateProperty.all(Colors.red),
+    textStyle: WidgetStateProperty.all(
       textStyle.labelMedium!.copyWith(color: Colors.white),
     ),
   ),
   confirmButtonStyle: ButtonStyle(
-    shape: MaterialStateProperty.all(
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
-    backgroundColor: MaterialStateProperty.all(Colors.green),
-    overlayColor: MaterialStateProperty.all(Colors.green),
-    textStyle: MaterialStateProperty.all(
+    backgroundColor: WidgetStateProperty.all(Colors.green),
+    overlayColor: WidgetStateProperty.all(Colors.green),
+    textStyle: WidgetStateProperty.all(
       textStyle.labelMedium!.copyWith(color: Colors.white),
     ),
   ),

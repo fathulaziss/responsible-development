@@ -30,18 +30,18 @@ class ButtonPrimary extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
-        surfaceTintColor: MaterialStateProperty.all(backgroundColor),
-        overlayColor: MaterialStateProperty.all(overlayColor),
-        minimumSize: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all(backgroundColor),
+        surfaceTintColor: WidgetStateProperty.all(backgroundColor),
+        overlayColor: WidgetStateProperty.all(overlayColor),
+        minimumSize: WidgetStateProperty.all(
           size ?? Size(MediaQuery.of(context).size.width, 45),
         ),
-        shape: MaterialStateProperty.all(
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius ?? 8),
           ),
         ),
-        padding: MaterialStateProperty.all(padding),
+        padding: WidgetStateProperty.all(padding),
       ),
       child: child ??
           Text(
