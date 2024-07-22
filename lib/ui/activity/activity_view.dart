@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:responsible_development/models/my_project_model.dart';
 import 'package:responsible_development/provider/activity_provider.dart';
 import 'package:responsible_development/provider/history_provider.dart';
+import 'package:responsible_development/provider/home_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
 import 'package:responsible_development/utils/app_utils.dart';
@@ -149,6 +150,11 @@ class _ActivityViewState extends State<ActivityView> {
                           );
                           if (context.mounted) {
                             await activityProvider.getMyProject(context);
+                          }
+                          if (context.mounted) {
+                            await context
+                                .read<HomeProvider>()
+                                .getMyProject(context);
                           }
                         },
                       ),

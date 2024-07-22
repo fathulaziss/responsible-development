@@ -23,7 +23,11 @@ class HomeProvider extends ChangeNotifier {
       final user = await UserDatabase.selectData();
       final data = await MyProjectDatabase.selectData(user);
       _listMyProject = data;
-      setSelectedProject(_listMyProject.first);
+
+      if (_listMyProject.isNotEmpty) {
+        setSelectedProject(_listMyProject.first);
+      }
+
       await Future.delayed(const Duration(seconds: 1));
       notifyListeners();
 

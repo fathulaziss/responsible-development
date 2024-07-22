@@ -42,10 +42,15 @@ class _HomeViewState extends State<HomeView> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: ButtonPrimary(
                       label: 'Pilih Proyek RD',
-                      onPressed: () {
-                        NavigationService.pushNamed(
+                      onPressed: () async {
+                        await NavigationService.pushNamed(
                           MyProjectAddView.routeName,
                         );
+                        if (context.mounted) {
+                          await context
+                              .read<HomeProvider>()
+                              .getMyProject(context);
+                        }
                       },
                     ),
                   ),
