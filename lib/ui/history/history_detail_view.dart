@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsible_development/common/styles.dart';
@@ -10,6 +12,7 @@ import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/buttons/button_primary.dart';
 import 'package:responsible_development/widgets/cards/card_custom.dart';
 import 'package:responsible_development/widgets/others/custom_divider.dart';
+import 'package:responsible_development/widgets/others/preview_photo.dart';
 
 class HistoryDetailView extends StatefulWidget {
   const HistoryDetailView({super.key, required this.data});
@@ -174,6 +177,63 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                     Text(activityData.description, style: textStyle.bodyMedium),
               ),
             ),
+            if (activityData.attachments.isNotEmpty)
+              Text('Foto', style: textStyle.labelSmall),
+            if (activityData.attachments.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: activityData.attachments.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: activityData.isSynchronize == 1
+                            ? InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return PreviewPhoto(
+                                        imagePath:
+                                            activityData.attachments[index],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Image.file(
+                                  File(activityData.attachments[index]),
+                                  width: 150,
+                                  height: 150,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return PreviewPhoto(
+                                        imagePath:
+                                            activityData.attachments[index],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Image.file(
+                                  File(activityData.attachments[index]),
+                                  width: 150,
+                                  height: 150,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                      );
+                    },
+                  ),
+                ),
+              ),
           ],
         ),
       ),

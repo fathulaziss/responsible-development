@@ -2,13 +2,20 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/models/activity_model.dart';
+import 'package:responsible_development/provider/utility_provider.dart';
+import 'package:responsible_development/services/image_service.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/buttons/button_primary.dart';
 import 'package:responsible_development/widgets/inputs/input_primary.dart';
 import 'package:responsible_development/widgets/inputs/input_time.dart';
+import 'package:responsible_development/widgets/others/photo.dart';
+import 'package:responsible_development/widgets/others/preview_photo.dart';
 import 'package:responsible_development/widgets/others/show_dialog.dart';
+import 'package:responsible_development/widgets/others/vertical_space.dart';
 
 class HistoryEditView extends StatefulWidget {
   const HistoryEditView({super.key, required this.data});
@@ -30,6 +37,7 @@ class _HistoryEditViewState extends State<HistoryEditView> {
   TextEditingController descriptionController = TextEditingController();
   TimeOfDay? selectedTimeStart;
   TimeOfDay? selectedTimeFinish;
+  List attachments = [];
 
   @override
   void initState() {
@@ -44,6 +52,7 @@ class _HistoryEditViewState extends State<HistoryEditView> {
         AppUtils.convertStringToTimeOfDay(activityData.finishTime);
     timeFinishController.text = activityData.finishTime;
     descriptionController.text = activityData.description;
+    attachments = activityData.attachments;
     super.initState();
   }
 
@@ -106,6 +115,7 @@ class _HistoryEditViewState extends State<HistoryEditView> {
                     isSynchronize: activityData.isSynchronize,
                     projectId: activityData.projectId,
                     projectName: activityData.projectName,
+                    attachments: attachments,
                     startTime:
                         AppUtils.convertTimeOfDayToString(selectedTimeStart),
                     updatedAt: AppUtils.convertDateTimeToString(DateTime.now()),
@@ -166,6 +176,70 @@ class _HistoryEditViewState extends State<HistoryEditView> {
                   keyboardType: TextInputType.multiline,
                   validator: (value) => null,
                 ),
+                if (activityData.attachments.isNotEmpty)
+                  Consumer<UtilityProvider>(
+                    builder: (context, utilityProvider, _) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Foto',
+                            style: textStyle.bodyMedium!.copyWith(
+                              color: (utilityProvider.isDarkTheme ||
+                                      MediaQuery.of(context)
+                                              .platformBrightness ==
+                                          Brightness.dark)
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                          const VerticalSpace(height: 8),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: 150,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: attachments.length,
+                              itemBuilder: (context, index) {
+                                final attachment = attachments[index];
+                                return Photo(
+                                  imagePath: attachment,
+                                  onTapRemove: () {
+                                    attachments.remove(attachment);
+                                    setState(() {});
+                                  },
+                                  onTapView: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return PreviewPhoto(
+                                          imagePath: attachment,
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                if (attachments.length < 5)
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ButtonPrimary(
+                      label: 'Lampirkan Foto',
+                      onPressed: () async {
+                        final result = await ImageService.camera();
+                        if (result != null) {
+                          attachments.add(result);
+                          setState(() {});
+                        }
+                      },
+                    ),
+                  ),
               ],
             ),
           ),

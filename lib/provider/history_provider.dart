@@ -47,6 +47,7 @@ class HistoryProvider extends ChangeNotifier {
         projectName: data.projectName,
         startTime: data.startTime,
         updatedAt: data.updatedAt,
+        attachments: data.attachments,
         userId: data.userId,
       );
 

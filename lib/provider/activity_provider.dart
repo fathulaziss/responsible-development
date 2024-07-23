@@ -7,6 +7,7 @@ import 'package:responsible_development/database/user_database.dart';
 import 'package:responsible_development/models/activity_model.dart';
 import 'package:responsible_development/models/my_project_model.dart';
 import 'package:responsible_development/models/user_model.dart';
+import 'package:responsible_development/services/image_service.dart';
 import 'package:responsible_development/utils/app_utils.dart';
 import 'package:responsible_development/widgets/others/loading_indicator.dart';
 import 'package:responsible_development/widgets/others/show_dialog.dart';
@@ -35,6 +36,10 @@ class ActivityProvider extends ChangeNotifier {
   TimeOfDay? _selectedTimeFinish;
 
   TimeOfDay? get selectedTimeFinish => _selectedTimeFinish;
+
+  final List<String> _attachments = [];
+
+  List<String> get attachments => _attachments;
 
   Future<void> getMyProject(BuildContext context) async {
     if (_listMyProject.isEmpty) {
@@ -87,6 +92,32 @@ class ActivityProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> takePhoto(BuildContext context) async {
+    if (attachments.length < 5) {
+      final result = await ImageService.camera();
+      if (result != null) {
+        _attachments.add(result);
+        notifyListeners();
+      }
+    } else {
+      showToast(
+        context,
+        message: 'Maximal 5 photos',
+        backgroundColor: AppColor.warning,
+      );
+    }
+  }
+
+  void removeAttachment(String value) {
+    attachments.remove(value);
+    notifyListeners();
+  }
+
+  void addAttachment(String value) {
+    attachments.add(value);
+    notifyListeners();
+  }
+
   Future<void> save(BuildContext context, String description) async {
     context.loaderOverlay.show(
       widgetBuilder: (progress) => const LoadingIndicatorDefault(),
@@ -100,6 +131,7 @@ class ActivityProvider extends ChangeNotifier {
       startTime: AppUtils.convertTimeOfDayToString(selectedTimeStart),
       finishTime: AppUtils.convertTimeOfDayToString(selectedTimeFinish),
       description: description,
+      attachments: attachments,
       userId: user.id ?? '',
       createdAt: AppUtils.convertDateTimeToString(DateTime.now()),
     );

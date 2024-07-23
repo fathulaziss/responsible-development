@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/models/my_project_model.dart';
 import 'package:responsible_development/provider/activity_provider.dart';
 import 'package:responsible_development/provider/history_provider.dart';
 import 'package:responsible_development/provider/home_provider.dart';
+import 'package:responsible_development/provider/utility_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/my_project/my_project_add_view.dart';
 import 'package:responsible_development/utils/app_utils.dart';
@@ -15,6 +17,8 @@ import 'package:responsible_development/widgets/inputs/input_dropdown.dart';
 import 'package:responsible_development/widgets/inputs/input_primary.dart';
 import 'package:responsible_development/widgets/inputs/input_time.dart';
 import 'package:responsible_development/widgets/others/input_dropdown_item.dart';
+import 'package:responsible_development/widgets/others/photo.dart';
+import 'package:responsible_development/widgets/others/preview_photo.dart';
 import 'package:responsible_development/widgets/others/show_dialog.dart';
 import 'package:responsible_development/widgets/others/vertical_space.dart';
 
@@ -215,6 +219,66 @@ class _ActivityViewState extends State<ActivityView> {
                             keyboardType: TextInputType.multiline,
                             validator: (value) => null,
                           ),
+                          if (activityProvider.attachments.isNotEmpty)
+                            Consumer<UtilityProvider>(
+                              builder: (context, utilityProvider, _) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Foto',
+                                      style: textStyle.bodyMedium!.copyWith(
+                                        color: (utilityProvider.isDarkTheme ||
+                                                MediaQuery.of(context)
+                                                        .platformBrightness ==
+                                                    Brightness.dark)
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                    const VerticalSpace(height: 8),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 150,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            activityProvider.attachments.length,
+                                        itemBuilder: (context, index) {
+                                          final attachment = activityProvider
+                                              .attachments[index];
+                                          return Photo(
+                                            imagePath: attachment,
+                                            onTapRemove: () => activityProvider
+                                                .removeAttachment(attachment),
+                                            onTapView: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return PreviewPhoto(
+                                                    imagePath: attachment,
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          if (activityProvider.attachments.length < 5)
+                            Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: ButtonPrimary(
+                                label: 'Lampirkan Foto',
+                                onPressed: () {
+                                  activityProvider.takePhoto(context);
+                                },
+                              ),
+                            ),
                         ],
                       ),
                     ),

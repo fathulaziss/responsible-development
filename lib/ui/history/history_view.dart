@@ -98,7 +98,7 @@ class _HistoryViewState extends State<HistoryView> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Tanggal : ',
+                                      'Tanggal Dibuat : ',
                                       style: textStyle.bodyMedium!.copyWith(
                                         color: data.isSynchronize == 0
                                             ? Colors.white
@@ -115,6 +115,27 @@ class _HistoryViewState extends State<HistoryView> {
                                     ),
                                   ],
                                 ),
+                                if (data.updatedAt.isNotEmpty)
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Tanggal Dirubah : ',
+                                        style: textStyle.bodyMedium!.copyWith(
+                                          color: data.isSynchronize == 0
+                                              ? Colors.white
+                                              : null,
+                                        ),
+                                      ),
+                                      Text(
+                                        data.updatedAt,
+                                        style: textStyle.bodyMedium!.copyWith(
+                                          color: data.isSynchronize == 0
+                                              ? Colors.white
+                                              : null,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 Row(
                                   children: [
                                     Text(

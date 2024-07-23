@@ -17,6 +17,7 @@ class ActivityDatabase {
         ${ActivityEntity.startTime} TEXT,
         ${ActivityEntity.finishTime} TEXT,
         ${ActivityEntity.description} TEXT,
+        ${ActivityEntity.attachments} TEXT,
         ${ActivityEntity.isSynchronize} INTEGER,
         ${ActivityEntity.createdAt} TEXT,
         ${ActivityEntity.updatedAt} TEXT)
@@ -34,7 +35,8 @@ class ActivityDatabase {
         whereArgs: [user.id],
       );
 
-      final data = List<ActivityModel>.from(mapList.map(ActivityModel.fromMap));
+      final data =
+          List<ActivityModel>.from(mapList.map(ActivityModel.fromDatabase));
       return data;
     }
 
@@ -44,7 +46,7 @@ class ActivityDatabase {
   static Future<void> insertData(ActivityModel data) async {
     final db = await AppDatabase().database;
     if (db != null) {
-      await db.insert(activityTable, data.toMap());
+      await db.insert(activityTable, data.toDatabase());
     }
   }
 
@@ -60,7 +62,8 @@ class ActivityDatabase {
         whereArgs: [user.id, 0],
       );
 
-      final data = List<ActivityModel>.from(mapList.map(ActivityModel.fromMap));
+      final data =
+          List<ActivityModel>.from(mapList.map(ActivityModel.fromDatabase));
       return data;
     }
 
@@ -72,7 +75,7 @@ class ActivityDatabase {
     if (db != null) {
       await db.update(
         activityTable,
-        data.toMap(),
+        data.toDatabase(),
         where: '${ActivityEntity.id}=?',
         whereArgs: [data.id],
       );
