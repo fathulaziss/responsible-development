@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -278,6 +280,7 @@ class _MyProjectAddViewState extends State<MyProjectAddView> {
                                             await NavigationService.pushNamed(
                                           ProjectSearchView.routeName,
                                         );
+                                        log('check data : $data');
                                         if (data != null) {
                                           selectedProject = data;
                                           setState(() {});

@@ -123,6 +123,12 @@ class ActivityProvider extends ChangeNotifier {
       widgetBuilder: (progress) => const LoadingIndicatorDefault(),
     );
 
+    final duration = AppUtils.getDurationInt(
+      AppUtils.convertDateTimeToString(DateTime.now()),
+      AppUtils.convertTimeOfDayToString(selectedTimeStart),
+      AppUtils.convertTimeOfDayToString(selectedTimeFinish),
+    );
+
     final data = ActivityModel(
       id: AppUtils.generateActivityId(),
       date: AppUtils.convertDateTimeToString(DateTime.now()),
@@ -130,8 +136,11 @@ class ActivityProvider extends ChangeNotifier {
       projectName: selectedProject.project?.name ?? '',
       startTime: AppUtils.convertTimeOfDayToString(selectedTimeStart),
       finishTime: AppUtils.convertTimeOfDayToString(selectedTimeFinish),
+      duration: duration,
       description: description,
       attachments: attachments,
+      projectPeriode: selectedProject.project?.periode?.last ?? '',
+      monthPeriode: AppUtils.getMonth(DateTime.now().month),
       userId: user.id ?? '',
       createdAt: AppUtils.convertDateTimeToString(DateTime.now()),
     );

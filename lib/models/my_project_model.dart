@@ -42,6 +42,12 @@ class MyProjectModel extends Equatable {
                     .map((e) => e.toString()),
               )
             : [],
+        periode: jsonDecode(database['project_periode']) != null
+            ? List<String>.from(
+                (jsonDecode(database['project_periode']) as List)
+                    .map((e) => e.toString()),
+              )
+            : [],
       ),
     );
   }
@@ -68,6 +74,7 @@ class MyProjectModel extends Equatable {
       'project_dic': jsonEncode(project?.dic),
       'project_pic': jsonEncode(project?.pic),
       'project_location': jsonEncode(project?.location),
+      'project_periode': jsonEncode(project?.periode),
     };
   }
 

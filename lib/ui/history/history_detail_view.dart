@@ -6,6 +6,7 @@ import 'package:responsible_development/common/styles.dart';
 import 'package:responsible_development/database/activity_database.dart';
 import 'package:responsible_development/models/activity_model.dart';
 import 'package:responsible_development/provider/history_provider.dart';
+import 'package:responsible_development/provider/home_provider.dart';
 import 'package:responsible_development/services/navigation_service.dart';
 import 'package:responsible_development/ui/history/history_edit_view.dart';
 import 'package:responsible_development/utils/app_utils.dart';
@@ -58,6 +59,12 @@ class _HistoryDetailViewState extends State<HistoryDetailView> {
                     await ActivityDatabase.updateData(activityData);
                     if (context.mounted) {
                       await context.read<HistoryProvider>().getHistory(context);
+                    }
+
+                    if (context.mounted) {
+                      await context
+                          .read<HomeProvider>()
+                          .getActivityHistoryData();
                     }
 
                     setState(() {});

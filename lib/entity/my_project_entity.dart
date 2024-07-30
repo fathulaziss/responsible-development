@@ -7,4 +7,5 @@ class MyProjectEntity {
   static String projectDic = 'project_dic';
   static String projectPic = 'project_pic';
   static String projectLocation = 'project_location';
+  static String projectPeriode = 'project_periode';
 }

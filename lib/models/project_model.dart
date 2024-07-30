@@ -10,6 +10,7 @@ class ProjectModel extends Equatable {
     this.dic,
     this.pic,
     this.location,
+    this.periode,
   });
 
   factory ProjectModel.fromMap(Map<String, dynamic> map) {
@@ -26,6 +27,11 @@ class ProjectModel extends Equatable {
       location: map['location'] != null
           ? List<String>.from(
               (map['location'] as List).map((e) => e.toString()),
+            )
+          : [],
+      periode: map['periode'] != null
+          ? List<String>.from(
+              (map['periode'] as List).map((e) => e.toString()),
             )
           : [],
     );
@@ -52,6 +58,12 @@ class ProjectModel extends Equatable {
                   .map((e) => e.toString()),
             )
           : [],
+      periode: jsonDecode(database['periode']) != null
+          ? List<String>.from(
+              (jsonDecode(database['periode']) as List)
+                  .map((e) => e.toString()),
+            )
+          : [],
     );
   }
 
@@ -61,6 +73,7 @@ class ProjectModel extends Equatable {
   final List<String>? dic;
   final List<String>? pic;
   final List<String>? location;
+  final List<String>? periode;
 
   Map<String, dynamic> toMap() {
     return {
@@ -70,6 +83,7 @@ class ProjectModel extends Equatable {
       'dic': List.from(dic!.map((e) => e)),
       'pic': List.from(pic!.map((e) => e)),
       'location': List.from(location!.map((e) => e)),
+      'periode': List.from(periode!.map((e) => e)),
     };
   }
 
@@ -81,14 +95,15 @@ class ProjectModel extends Equatable {
       'dic': jsonEncode(dic),
       'pic': jsonEncode(pic),
       'location': jsonEncode(location),
+      'periode': jsonEncode(periode),
     };
   }
 
   @override
   String toString() {
-    return 'ProjectModel(id: $id, category: $category, name: $name, dic: $dic, pic: $pic, location: $location)';
+    return 'ProjectModel(id: $id, category: $category, name: $name, dic: $dic, pic: $pic, location: $location, periode: $periode)';
   }
 
   @override
-  List<Object?> get props => [id, category, name, dic, pic, location];
+  List<Object?> get props => [id, category, name, dic, pic, location, periode];
 }

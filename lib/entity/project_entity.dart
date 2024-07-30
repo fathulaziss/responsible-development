@@ -5,4 +5,5 @@ class ProjectEntity {
   static String dic = 'dic';
   static String pic = 'pic';
   static String location = 'location';
+  static String periode = 'periode';
 }

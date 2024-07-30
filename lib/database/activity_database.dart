@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:responsible_development/constants/database_table.dart';
 import 'package:responsible_development/database/user_database.dart';
 import 'package:responsible_development/entity/activity_entity.dart';
@@ -16,9 +18,12 @@ class ActivityDatabase {
         ${ActivityEntity.projectName} TEXT,
         ${ActivityEntity.startTime} TEXT,
         ${ActivityEntity.finishTime} TEXT,
+        ${ActivityEntity.duration} INTEGER,
         ${ActivityEntity.description} TEXT,
         ${ActivityEntity.attachments} TEXT,
         ${ActivityEntity.isSynchronize} INTEGER,
+        ${ActivityEntity.projectPeriode} TEXT,
+        ${ActivityEntity.monthPeriode} TEXT,
         ${ActivityEntity.createdAt} TEXT,
         ${ActivityEntity.updatedAt} TEXT)
     ''');
@@ -41,6 +46,60 @@ class ActivityDatabase {
     }
 
     return [];
+  }
+
+  static Future<double> selectDataSummary({
+    required String projectName,
+    required String periode,
+    String? monthPeriode,
+  }) async {
+    final db = await AppDatabase().database;
+
+    if (db != null) {
+      final user = await UserDatabase.selectData();
+      if (monthPeriode == null) {
+        final mapList = await db.query(
+          activityTable,
+          where:
+              '${ActivityEntity.userId}=? AND ${ActivityEntity.projectName}=? AND ${ActivityEntity.projectPeriode}=?',
+          whereArgs: [user.id, projectName, periode],
+        );
+
+        final data =
+            List<ActivityModel>.from(mapList.map(ActivityModel.fromDatabase));
+        if (data.isNotEmpty) {
+          final totalDurationInPeriode = data.fold(
+            0,
+            (previousValue, element) => previousValue + element.duration,
+          );
+          return totalDurationInPeriode / 60;
+        } else {
+          return 0.0;
+        }
+      } else {
+        final mapList = await db.query(
+          activityTable,
+          where:
+              '${ActivityEntity.userId}=? AND ${ActivityEntity.projectName}=? AND ${ActivityEntity.projectPeriode}=? AND ${ActivityEntity.monthPeriode}=?',
+          whereArgs: [user.id, projectName, periode, monthPeriode],
+        );
+
+        final data =
+            List<ActivityModel>.from(mapList.map(ActivityModel.fromDatabase));
+        log('check query $monthPeriode : $data');
+        if (data.isNotEmpty) {
+          final totalDurationInMonthPeriode = data.fold(
+            0,
+            (previousValue, element) => previousValue + element.duration,
+          );
+          return totalDurationInMonthPeriode / 60;
+        } else {
+          return 0.0;
+        }
+      }
+    }
+
+    return 0.0;
   }
 
   static Future<void> insertData(ActivityModel data) async {

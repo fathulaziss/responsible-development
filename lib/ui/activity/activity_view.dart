@@ -137,6 +137,11 @@ class _ActivityViewState extends State<ActivityView> {
                                   .read<HistoryProvider>()
                                   .getHistory(context);
                             }
+                            if (context.mounted) {
+                              await context
+                                  .read<HomeProvider>()
+                                  .getActivityHistoryData();
+                            }
                           },
                         );
                       },

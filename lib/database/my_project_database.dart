@@ -16,7 +16,8 @@ class MyProjectDatabase {
         ${MyProjectEntity.projectName} TEXT,
         ${MyProjectEntity.projectDic} TEXT,
         ${MyProjectEntity.projectPic} TEXT,
-        ${MyProjectEntity.projectLocation} TEXT)
+        ${MyProjectEntity.projectLocation} TEXT,
+        ${MyProjectEntity.projectPeriode} TEXT)
     ''');
   }
 

@@ -13,7 +13,8 @@ class ProjectDatabase {
         ${ProjectEntity.name} TEXT,
         ${ProjectEntity.dic} TEXT,
         ${ProjectEntity.pic} TEXT,
-        ${ProjectEntity.location} TEXT)
+        ${ProjectEntity.location} TEXT,
+        ${ProjectEntity.periode} TEXT)
     ''');
   }
 

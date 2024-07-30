@@ -11,6 +11,10 @@ final projectDummy = [
       'Agustinus Airlangga',
     ],
     'location': ['ANJA', 'SMM', 'ANJAS', 'KAL'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a2',
@@ -19,6 +23,10 @@ final projectDummy = [
     'dic': ['Vonny S Ardhi', 'Juli Wankara Purba'],
     'pic': ['Agustinus Airlangga', 'Antonius Simangunsong', 'Gritje Fonataba'],
     'location': ['PMP', 'PPM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a3',
@@ -42,6 +50,10 @@ final projectDummy = [
       'Ilham RT Damanik',
     ],
     'location': [],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a4',
@@ -50,6 +62,10 @@ final projectDummy = [
     'dic': ['Jerileva Purba'],
     'pic': ['Mohd. Amroi Siregar', 'Dadi Supriadi'],
     'location': ['ANJAS', 'KAL'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a5',
@@ -65,6 +81,10 @@ final projectDummy = [
       'Antonius Simangunsong',
     ],
     'location': [],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a6',
@@ -73,6 +93,10 @@ final projectDummy = [
     'dic': ['Nunik Maharani Maulana'],
     'pic': ['Arianto Wibowo', 'Antonius Simangunsong', 'Jimmy Efraim'],
     'location': ['PPM', 'PMP', 'ANJAP'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a7',
@@ -91,6 +115,10 @@ final projectDummy = [
       'Burhannudin',
     ],
     'location': ['ANJA', 'SMM', 'ANJAS', 'KAL'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a8',
@@ -99,6 +127,10 @@ final projectDummy = [
     'dic': ['Nunik Maharani Maulana', 'Nopri Pitoy'],
     'pic': ['Arianto Wibowo', 'Mohd. Amrol Siregar', 'Antonius Simangunsong'],
     'location': ['ANJAS', 'PPM', 'PMP'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a9',
@@ -107,6 +139,10 @@ final projectDummy = [
     'dic': ['Lucas Kurniawan', 'Geetha Govindan', 'Mohammad Fitriyansyah'],
     'pic': ['Burhannudin', 'Agustinus Airlangga'],
     'location': [],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a10',
@@ -129,6 +165,10 @@ final projectDummy = [
       'Margo Waluyo',
     ],
     'location': [],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a11',
@@ -147,6 +187,10 @@ final projectDummy = [
       'Adhika Karuna',
     ],
     'location': [],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-a12',
@@ -155,6 +199,10 @@ final projectDummy = [
     'dic': ['Geetha Govindan', 'Juli Wankara Purba'],
     'pic': ['Antonius Simangunsong', 'Whisnu R. Triatmoko'],
     'location': ['PPM', 'PMP'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b1',
@@ -163,6 +211,10 @@ final projectDummy = [
     'dic': ['Vonny S Ardhi'],
     'pic': ['Arianto Wibowo', 'Pradana Jatikusuma'],
     'location': ['PPM', 'PMP'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b2',
@@ -171,6 +223,10 @@ final projectDummy = [
     'dic': ['Vonny S Ardhi'],
     'pic': ['Arianto Wibowo', 'Antonius Simangunsong'],
     'location': ['PPM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b3',
@@ -179,6 +235,10 @@ final projectDummy = [
     'dic': ["Aloysius D'cruz", 'Jerileva Purba', 'Juli Wankara Purba'],
     'pic': ['Taupan Sibarani', 'Mohd. Amrol Siregar', 'Antonius Simangunsong'],
     'location': ['ANJA', 'ANJAS', 'PMP', 'PPM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b4',
@@ -187,6 +247,10 @@ final projectDummy = [
     'dic': ['Imam Wahyudi'],
     'pic': ['Rahmad Hidayat Yusuf'],
     'location': ['GMIT'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b5',
@@ -195,6 +259,10 @@ final projectDummy = [
     'dic': ['Lucas Kurniawan'],
     'pic': ['Nelda Hermawan'],
     'location': ['HO'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b6',
@@ -203,6 +271,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba'],
     'pic': ['Mukhlisuddin Nasution'],
     'location': ['SMM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b7',
@@ -211,6 +283,10 @@ final projectDummy = [
     'dic': ['Nunik Maharani Maulana', 'Whisnu R. Triatmoko'],
     'pic': ['Riftyza Gestandi'],
     'location': ['HO'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b8',
@@ -219,6 +295,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba'],
     'pic': ['Mukhlisuddin Nasution'],
     'location': ['SMM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b9',
@@ -227,6 +307,10 @@ final projectDummy = [
     'dic': ['Nunik Maharani Maulana', 'Whisnu R. Triatmoko'],
     'pic': ['Erwin Santoso', 'David Kurniawan'],
     'location': ['HO'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b10',
@@ -235,6 +319,10 @@ final projectDummy = [
     'dic': ['Harsono Sutikno', 'Whisnu R. Triatmoko'],
     'pic': ['Nurwachid A Jaenudin', 'Nelson Suwiko'],
     'location': ['HO'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b11',
@@ -243,6 +331,10 @@ final projectDummy = [
     'dic': ['Jerileva Purba'],
     'pic': ['Dadi Supriadi'],
     'location': ['KAL'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b12',
@@ -251,6 +343,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba'],
     'pic': ['Mukhlisuddin Nasution'],
     'location': ['SMM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b13',
@@ -259,6 +355,10 @@ final projectDummy = [
     'dic': ['Imam Wahyudi'],
     'pic': ['Margo Waluyo', 'Rahmad Hidayat Yusuf'],
     'location': ['GMIT'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-b14',
@@ -267,6 +367,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba', 'Jerileva Purba'],
     'pic': ['Taupan Sibarani', 'Mohd. Amrol Siregar'],
     'location': ['ANJA', 'ANJAS'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c1',
@@ -275,6 +379,10 @@ final projectDummy = [
     'dic': ['Jerileva Purba'],
     'pic': ['Roli H Garingging', 'Mohd. Amrol Siregar'],
     'location': ['ANJAS'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c2',
@@ -283,6 +391,10 @@ final projectDummy = [
     'dic': ['Imam Wahyudi'],
     'pic': ['Margo Waluyo'],
     'location': ['GMIT'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c3',
@@ -291,6 +403,10 @@ final projectDummy = [
     'dic': ['Nopri Pitoy'],
     'pic': ['Freddy M Siagian'],
     'location': ['RO Medan'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c4',
@@ -299,6 +415,10 @@ final projectDummy = [
     'dic': ['Mohammad Fitriyansyah', 'Harsono Sutikno'],
     'pic': ['Nelda Hermawan', 'Gritje Fonataba'],
     'location': ['RO Sorong'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c5',
@@ -307,6 +427,10 @@ final projectDummy = [
     'dic': ['Naga Waskita'],
     'pic': ['David Kurniawan'],
     'location': ['HO'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c6',
@@ -315,6 +439,10 @@ final projectDummy = [
     'dic': ['Nunik Maharani Maulana'],
     'pic': ['Nelda Hermawan', 'Martha Diorima'],
     'location': ['HO'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c7',
@@ -323,6 +451,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba'],
     'pic': ['Mukhlisuddin Nasution'],
     'location': ['SMM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c8',
@@ -331,6 +463,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba'],
     'pic': ['Mukhlisuddin Nasution'],
     'location': ['SMM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c9',
@@ -339,6 +475,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba'],
     'pic': ['Mukhlisuddin Nasution'],
     'location': ['SMM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c10',
@@ -347,6 +487,10 @@ final projectDummy = [
     'dic': ['Juli Wankara Purba'],
     'pic': ['Mukhlisuddin Nasution'],
     'location': ['SMM'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-c11',
@@ -355,6 +499,10 @@ final projectDummy = [
     'dic': ['Jerileva Purba'],
     'pic': ['Dadi Supriadi'],
     'location': ['KAL'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
   {
     'id': 'rd-d1',
@@ -363,5 +511,9 @@ final projectDummy = [
     'dic': ['Nunik Maharani Maulana', 'Lucas Kurniawan'],
     'pic': ['Arianto Wibowo', 'Nardiyono'],
     'location': ['HO'],
+    'periode': [
+      'Januari 2023 - Desember 2023',
+      'Januari 2024 - Desember 2024',
+    ],
   },
 ];

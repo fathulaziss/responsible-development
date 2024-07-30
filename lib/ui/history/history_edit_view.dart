@@ -105,10 +105,17 @@ class _HistoryEditViewState extends State<HistoryEditView> {
                 title: 'Konfirmasi',
                 desc: 'Apakah data yang Anda edit sudah sesuai ?',
                 onTapPositif: () {
+                  final duration = AppUtils.getDurationInt(
+                    activityData.date,
+                    AppUtils.convertTimeOfDayToString(selectedTimeStart),
+                    AppUtils.convertTimeOfDayToString(selectedTimeFinish),
+                  );
+
                   final activityDataUpdate = ActivityModel(
                     createdAt: activityData.createdAt,
                     date: activityData.date,
                     description: descriptionController.text,
+                    duration: duration,
                     finishTime:
                         AppUtils.convertTimeOfDayToString(selectedTimeFinish),
                     id: activityData.id,
@@ -118,6 +125,8 @@ class _HistoryEditViewState extends State<HistoryEditView> {
                     attachments: attachments,
                     startTime:
                         AppUtils.convertTimeOfDayToString(selectedTimeStart),
+                    projectPeriode: activityData.projectPeriode,
+                    monthPeriode: activityData.monthPeriode,
                     updatedAt: AppUtils.convertDateTimeToString(DateTime.now()),
                     userId: activityData.userId,
                   );
